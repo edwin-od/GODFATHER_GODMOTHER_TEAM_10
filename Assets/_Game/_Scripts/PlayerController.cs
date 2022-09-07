@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour , IDamageable
 {
     public KeyCode up = KeyCode.UpArrow;
     public KeyCode down = KeyCode.DownArrow;
@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
             
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
+
+        currentHealth = 5;
     }
 
     private void Update()
@@ -31,5 +33,31 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? transform.forward : dir.normalized);
 
         //transform.rotation *= Quaternion.Euler(0, Time.deltaTime * rotationSpeed * Input.GetAxis("Horizontal"), 0);
+    }
+    
+    //IDamageable
+    public float currentHealth
+    {
+        get;
+
+        private set;
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            
+        }
+        Debug.Log("Current health : "+currentHealth);
+
+    }
+
+    private void Die()
+    {
+        //TODO implements Die method
+        //...
     }
 }
