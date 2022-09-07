@@ -15,6 +15,6 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         Vector3 aprox = Vector3.Lerp(transform.position, GameManager.Instance.Player.transform.position, Time.deltaTime * camFollowSpeed);
-        transform.position = Vector3.Distance(PlayerController.Instance.transform.position, aprox) > 0.01f ? aprox : GameManager.Instance.Player.transform.position;
+        transform.position = Vector3.Distance(GameManager.Instance.Player.transform.position, aprox) > 0.01f ? aprox : GameManager.Instance.Player.transform.position;
     }
 }

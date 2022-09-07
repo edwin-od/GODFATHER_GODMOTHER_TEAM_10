@@ -6,11 +6,6 @@ using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] KeyCode up = KeyCode.UpArrow;
-    [SerializeField] KeyCode down = KeyCode.DownArrow;
-    [SerializeField] KeyCode left = KeyCode.LeftArrow;
-    [SerializeField] KeyCode right = KeyCode.RightArrow;
-    
     [SerializeField] float playerSpeed = 6;
     
     [SerializeField] Stage[] stages;
