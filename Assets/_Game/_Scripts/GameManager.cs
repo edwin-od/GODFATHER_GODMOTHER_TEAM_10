@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
             ++i;
         }
         
-        for(; i - currentPlayer.currentHealth < currentPlayer.EnemySO.hp - currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
+        for(; i - currentPlayer.currentHealth - (isHalf ? 1 : 0) < currentPlayer.EnemySO.hp - currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
         {
             hps[i].sprite = emptyHeart;
         }
