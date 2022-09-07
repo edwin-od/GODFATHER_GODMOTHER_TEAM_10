@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] KeyCode left = KeyCode.LeftArrow;
     [SerializeField] KeyCode right = KeyCode.RightArrow;
     
-    [SerializeField] float playerSpeed = 5;
+    [SerializeField] float playerSpeed = 6;
     
     [SerializeField] Stage[] stages;
 
@@ -44,9 +46,20 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         _instance = this;
+        
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 30;
     }
 
-    Transform[] currentEnemies;
-    
-    
+    EnemyController currentPlayer;
+    public EnemyController Player => currentPlayer;
+    EnemyController[] currentEnemies;
+    bool isPlayerTransition = false;
+
+    private void Update()
+    {
+        Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized * Time.deltaTime * playerSpeed * (isPlayerTransition ? 0 : 1);
+        currentPlayer.transform.position += dir;
+        currentPlayer.transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? currentPlayer.transform.forward : dir.normalized);
+    }
 }
