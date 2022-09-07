@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour , IDamageable
+public class PlayerController : MonoBehaviour
 {
     public KeyCode up = KeyCode.UpArrow;
     public KeyCode down = KeyCode.DownArrow;
@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     public float translationSpeed = 5;
     //public float rotationSpeed = 100;
+
+    [SerializeField] private Animator animator;
 
 
     private static PlayerController _instance;
@@ -35,7 +37,6 @@ public class PlayerController : MonoBehaviour , IDamageable
         //transform.rotation *= Quaternion.Euler(0, Time.deltaTime * rotationSpeed * Input.GetAxis("Horizontal"), 0);
     }
     
-    //IDamageable
     public float currentHealth
     {
         get;
@@ -49,7 +50,11 @@ public class PlayerController : MonoBehaviour , IDamageable
 
         if (currentHealth <= 0)
         {
-            
+            Die();
+        }
+        else
+        {
+            animator.SetTrigger("Damage");
         }
         Debug.Log("Current health : "+currentHealth);
 
@@ -57,7 +62,14 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     private void Die()
     {
+        animator.SetTrigger("Death");
         //TODO implements Die method
         //...
+    }
+
+    //ATTACK TO DO
+    public void Attack()
+    {
+        animator.SetTrigger("Attack");
     }
 }
