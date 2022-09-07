@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] EnemyController currentPlayer;
     public EnemyController Player => currentPlayer;
-    HashSet<EnemyController> currentEnemies;
+    HashSet<EnemyController> currentEnemies = new HashSet<EnemyController>();
     public void AddEnemy(EnemyController e)
     {
         if (e != currentPlayer)
