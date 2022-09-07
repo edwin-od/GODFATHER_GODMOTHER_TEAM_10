@@ -6,12 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] float camFollowSpeed = 10f;
-    
-    void Start()
-    {
-        
-    }
-    
+
     void Update()
     {
         if (!GameManager.Instance) return;

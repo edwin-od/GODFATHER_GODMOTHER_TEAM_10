@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     class Stage
     {
         public EnemyStage[] enemyStages;
+        public Transform[] spawnPoints;
     }
 
     [System.Serializable]
@@ -54,13 +55,24 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] EnemyController currentPlayer;
     public EnemyController Player => currentPlayer;
-    EnemyController[] currentEnemies;
+    HashSet<EnemyController> currentEnemies;
+    public void AddEnemy(EnemyController e) => currentEnemies.Add(e);
+
+    public void RemoveEnemy(EnemyController e)
+    {
+        currentEnemies.Remove(e);
+        ++currentStage;
+        //if ()
+    }
+
     [HideInInspector] public bool isPlayerTransition = false;
 
     [SerializeField] private GameObject sword;
     [SerializeField] private float swordSpeed;
     private Vector3 launchDir;
     private float launchLimit;
+
+    public int currentStage = 0;
 
     private Image[] hps;
 
