@@ -11,13 +11,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite halfHeart;
     [SerializeField] Sprite emptyHeart;
     [SerializeField] Transform hpContainer;
+
+    [SerializeField] Transform playerSpawn;
+    [SerializeField] EnemySO playerSpawnType;
     
     [SerializeField] float playerSpeed = 6;
     
     [SerializeField] Stage[] stages;
 
     [System.Serializable]
-    class EnemySpawn
+    public class EnemySpawn
     {
         public EnemySO enemy;
         public int amount = 1;
@@ -33,12 +36,12 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     class Stage
     {
-        public EnemyStage[] enemyStages;
+        public EnemyWave[] enemyWaves;
         public Transform[] spawnPoints;
     }
 
     [System.Serializable]
-    class EnemyStage
+    class EnemyWave
     {
         public EnemySpawn[] enemies;
     }
@@ -56,14 +59,45 @@ public class GameManager : MonoBehaviour
     [SerializeField] EnemyController currentPlayer;
     public EnemyController Player => currentPlayer;
     HashSet<EnemyController> currentEnemies;
-    public void AddEnemy(EnemyController e) => currentEnemies.Add(e);
+    public void AddEnemy(EnemyController e)
+    {
+        if (e != currentPlayer)
+            currentEnemies.Add(e);
+    }
 
     public void RemoveEnemy(EnemyController e)
     {
+        if (e == currentPlayer)
+        {
+            // Game Over
+        }
+
         currentEnemies.Remove(e);
-        ++currentStage;
-        //if ()
+        
+        if (currentEnemies.Count == 0)
+        {
+            ++currentEnemyWave;
+            if (currentEnemyWave >= stages[currentStage].enemyWaves.Length)
+            {
+                currentEnemyWave = 0;
+                ++currentStage;
+
+                if (currentStage >= stages.Length)
+                {
+                    // Game End
+                    return;
+                }
+                OnNewStage?.Invoke();
+            }
+            OnNewEnemyWave?.Invoke();
+        }
     }
+
+    public EnemySpawn[] CurrentEnemySpawnInfo => stages[currentStage].enemyWaves[currentEnemyWave].enemies;
+    public Transform[] CurrentEnemySpawnsPoints => stages[currentStage].spawnPoints;
+
+    public Action OnNewEnemyWave;
+    public Action OnNewStage;
 
     [HideInInspector] public bool isPlayerTransition = false;
 
@@ -72,13 +106,24 @@ public class GameManager : MonoBehaviour
     private Vector3 launchDir;
     private float launchLimit;
 
-    public int currentStage = 0;
+    int currentStage = 0;
+    int currentEnemyWave = 0;
 
     private Image[] hps;
 
     private void Start()
     {
+        StartGame();
+    }
+
+    void StartGame()
+    {
+        currentPlayer = Instantiate(playerSpawnType.prefab, playerSpawn).GetComponent<EnemyController>();
+        currentPlayer.transform.SetParent(null);
         ChangePlayer(currentPlayer);
+
+        OnNewStage?.Invoke();
+        OnNewEnemyWave?.Invoke();
     }
 
     public void ChangePlayer(EnemyController newPlayer)

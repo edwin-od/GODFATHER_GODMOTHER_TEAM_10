@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     public EnemySO enemySO;
     public EnemySO EnemySO => enemySO;
 
-    public bool possessed = false;
+    [HideInInspector] public bool possessed = false;
 
     private void Start()
     {
@@ -22,6 +22,8 @@ public class EnemyController : MonoBehaviour
         this.enemySO = enemySO;
         
         currentHealth = enemySO.hp;
+
+        GameManager.Instance.AddEnemy(this);
     }
 
     public float currentHealth
@@ -55,6 +57,8 @@ public class EnemyController : MonoBehaviour
         //animator.SetTrigger("Death");
         //TODO implements Die method
         //...
+
+        GameManager.Instance.RemoveEnemy(this);
     }
 
     //ATTACK TO DO
