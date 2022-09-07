@@ -46,15 +46,19 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 30;
     }
 
-    EnemyController currentPlayer;
+    [SerializeField] EnemyController currentPlayer;
     public EnemyController Player => currentPlayer;
     EnemyController[] currentEnemies;
     bool isPlayerTransition = false;
 
     private void Update()
     {
-        Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized * Time.deltaTime * playerSpeed * (isPlayerTransition ? 0 : 1);
-        currentPlayer.transform.position += dir;
-        currentPlayer.transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? currentPlayer.transform.forward : dir.normalized);
+        if (currentPlayer && !isPlayerTransition)
+        {
+            Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized * Time.deltaTime * playerSpeed;
+            currentPlayer.transform.position += dir;
+            currentPlayer.transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? currentPlayer.transform.forward : dir.normalized);
+        }
+        
     }
 }

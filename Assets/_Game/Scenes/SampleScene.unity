@@ -701,6 +701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 6
   stages: []
+  currentPlayer: {fileID: 1853757886}
 --- !u!4 &2045990889
 Transform:
   m_ObjectHideFlags: 0
