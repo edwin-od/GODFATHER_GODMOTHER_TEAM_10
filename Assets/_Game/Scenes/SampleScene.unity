@@ -508,7 +508,6 @@ GameObject:
   - component: {fileID: 1853757885}
   - component: {fileID: 1853757884}
   - component: {fileID: 1853757883}
-  - component: {fileID: 1853757882}
   - component: {fileID: 1853757886}
   m_Layer: 0
   m_Name: Player
@@ -517,24 +516,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1853757882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1853757881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 604be36a9f9f9d74ab633528271190e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  up: 273
-  down: 274
-  left: 276
-  right: 275
-  translationSpeed: 10
-  animator: {fileID: 0}
 --- !u!23 &1853757883
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -610,7 +591,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1853757881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef26ed414ff28054c8c75c47418b118d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c02847e5f55cbc4b956b426df208ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
