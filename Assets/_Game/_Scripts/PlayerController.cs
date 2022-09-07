@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public float translationSpeed = 5;
     //public float rotationSpeed = 100;
 
+    [SerializeField] private Animator animator;
+
 
     private static PlayerController _instance;
     public static PlayerController Instance => _instance;
@@ -22,6 +24,8 @@ public class PlayerController : MonoBehaviour
             
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
+
+        currentHealth = 5;
     }
 
     private void Update()
@@ -31,5 +35,41 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? transform.forward : dir.normalized);
 
         //transform.rotation *= Quaternion.Euler(0, Time.deltaTime * rotationSpeed * Input.GetAxis("Horizontal"), 0);
+    }
+    
+    public float currentHealth
+    {
+        get;
+
+        private set;
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            animator.SetTrigger("Damage");
+        }
+        Debug.Log("Current health : "+currentHealth);
+
+    }
+
+    private void Die()
+    {
+        animator.SetTrigger("Death");
+        //TODO implements Die method
+        //...
+    }
+
+    //ATTACK TO DO
+    public void Attack()
+    {
+        animator.SetTrigger("Attack");
     }
 }
