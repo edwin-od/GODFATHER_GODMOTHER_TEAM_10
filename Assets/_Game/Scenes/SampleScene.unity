@@ -214,7 +214,7 @@ Transform:
   m_GameObject: {fileID: 421880082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.16, y: 0, z: -1.63}
-  m_LocalScale: {x: 0.8950578, y: 3.3250275, z: 0.56618005}
+  m_LocalScale: {x: 0.8950578, y: 9.72, z: 0.56618005}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1321844361}
@@ -328,7 +328,7 @@ Transform:
   m_GameObject: {fileID: 481653400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.418, y: 0, z: 1.543}
-  m_LocalScale: {x: 0.8950578, y: 3.3250275, z: 0.56618005}
+  m_LocalScale: {x: 0.8950578, y: 9.72, z: 0.56618005}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1321844361}
@@ -423,7 +423,6 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
-  - component: {fileID: 705507996}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -508,26 +507,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &705507996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705507993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &764528442
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +536,7 @@ Transform:
   m_GameObject: {fileID: 764528442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.988, y: 0, z: -0.287}
-  m_LocalScale: {x: 0.8950578, y: 3.3250275, z: 0.56618005}
+  m_LocalScale: {x: 0.8950578, y: 9.72, z: 0.56618005}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1321844361}
@@ -671,7 +650,7 @@ Transform:
   m_GameObject: {fileID: 774548414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.008, y: 0, z: 0.999}
-  m_LocalScale: {x: 0.8950578, y: 3.3250275, z: 0.56618005}
+  m_LocalScale: {x: 0.8950578, y: 9.72, z: 0.56618005}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1321844361}
@@ -1064,7 +1043,7 @@ Transform:
   m_GameObject: {fileID: 1464593006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.08, y: 0, z: 0.02}
-  m_LocalScale: {x: 0.8950578, y: 3.3250275, z: 0.56618005}
+  m_LocalScale: {x: 0.8950578, y: 9.72, z: 0.56618005}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1321844361}
@@ -1362,6 +1341,7 @@ GameObject:
   - component: {fileID: 1565570497}
   - component: {fileID: 1565570496}
   - component: {fileID: 1565570499}
+  - component: {fileID: 1565570500}
   m_Layer: 6
   m_Name: Sword
   m_TagString: Untagged
@@ -1460,6 +1440,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f229b0891ccb2964d8c7c2afbce9b765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstaclesLayers:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!54 &1565570500
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565570494}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1884044420
 GameObject:
   m_ObjectHideFlags: 0
