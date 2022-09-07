@@ -6,10 +6,22 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    
-    private void Awake()
+
+    public EnemySO enemySO;
+    public EnemySO EnemySO => enemySO;
+
+    public bool possessed = false;
+
+    private void Start()
     {
-        currentHealth = 5;
+        Init(enemySO);
+    }
+
+    public void Init(EnemySO enemySO)
+    {
+        this.enemySO = enemySO;
+        
+        currentHealth = enemySO.hp;
     }
 
     public float currentHealth
@@ -21,7 +33,10 @@ public class EnemyController : MonoBehaviour
 
     public void ApplyDamage(float damage)
     {
-        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, enemySO.hp);
+        
+        if (possessed)
+            GameManager.Instance.UpdateHealthUI();
 
         if (currentHealth <= 0)
         {
@@ -29,7 +44,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            animator.SetTrigger("Damage");
+            //animator.SetTrigger("Damage");
         }
         Debug.Log("Current health : "+currentHealth);
 
@@ -37,7 +52,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        animator.SetTrigger("Death");
+        //animator.SetTrigger("Death");
         //TODO implements Die method
         //...
     }
@@ -45,6 +60,6 @@ public class EnemyController : MonoBehaviour
     //ATTACK TO DO
     public void Attack()
     {
-        animator.SetTrigger("Attack");
+        //animator.SetTrigger("Attack");
     }
 }

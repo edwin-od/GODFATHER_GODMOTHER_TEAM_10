@@ -3,9 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] Sprite fullHeart;
+    [SerializeField] Sprite halfHeart;
+    [SerializeField] Sprite emptyHeart;
+    [SerializeField] Transform hpContainer;
+    
     [SerializeField] float playerSpeed = 6;
     
     [SerializeField] Stage[] stages;
@@ -49,22 +55,35 @@ public class GameManager : MonoBehaviour
     [SerializeField] EnemyController currentPlayer;
     public EnemyController Player => currentPlayer;
     EnemyController[] currentEnemies;
-    public bool isPlayerTransition = false;
+    [HideInInspector] public bool isPlayerTransition = false;
 
     [SerializeField] private GameObject sword;
     [SerializeField] private float swordSpeed;
     private Vector3 launchDir;
     private float launchLimit;
 
+    private Image[] hps;
+
+    private void Start()
+    {
+        ChangePlayer(currentPlayer);
+    }
+
     public void ChangePlayer(EnemyController newPlayer)
     {
         currentPlayer.tag = "Enemy";
+        currentPlayer.possessed = false;
         currentPlayer = newPlayer;
+        currentPlayer.possessed = true;
         currentPlayer.tag = "Player";
         isPlayerTransition = false;
         sword.transform.SetParent(currentPlayer.transform);
         sword.transform.localPosition = new Vector3(0, 0.4f, 0.6f);
         sword.transform.localEulerAngles = new Vector3(90, 0, 0);
+        
+        currentPlayer.ApplyDamage(0.5f);
+
+        SpawnHPs();
     }
 
     void LaunchLimit()
@@ -99,6 +118,54 @@ public class GameManager : MonoBehaviour
             {
                 LaunchLimit();
             }
+        }
+    }
+    
+    private void SpawnHPs()
+    {
+        for (int i = 0; i < hpContainer.childCount; ++i)
+        {
+            Destroy(hpContainer.GetChild(i).gameObject);
+        }
+
+        hps = new Image[currentPlayer.EnemySO.hp];
+		
+        for (int i = 0; i < currentPlayer.EnemySO.hp; ++i)
+        {
+            GameObject NewObj = new GameObject();
+            Image NewImage = NewObj.AddComponent<Image>();
+            NewImage.sprite = fullHeart;
+            NewObj.GetComponent<RectTransform>().SetParent(hpContainer);
+            NewObj.SetActive(true);
+            hps[i] = NewImage;
+        }
+
+        UpdateHealthUI();
+    }
+    
+    public void UpdateHealthUI()
+    {
+        if (hpContainer.childCount < currentPlayer.EnemySO.hp)
+            SpawnHPs();
+        
+        bool isHalf = currentPlayer.currentHealth - Mathf.Floor(currentPlayer.currentHealth) > 0;
+		
+        int i = 0;
+		
+        for(; i < currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
+        {
+            hps[i].sprite = fullHeart;
+        }
+
+        if (isHalf)
+        {
+            hps[i].sprite = halfHeart;
+            ++i;
+        }
+        
+        for(; i - currentPlayer.currentHealth < currentPlayer.EnemySO.hp - currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
+        {
+            hps[i].sprite = emptyHeart;
         }
     }
 }
