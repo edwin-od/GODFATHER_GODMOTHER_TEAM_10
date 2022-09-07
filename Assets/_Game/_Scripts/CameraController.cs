@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float camFollowSpeed = 10f;
+    [SerializeField] float camFollowSpeed = 10f;
     
     void Start()
     {
         
     }
+    
     void Update()
     {
         Vector3 aprox = Vector3.Lerp(transform.position, PlayerController.Instance.transform.position, Time.deltaTime * camFollowSpeed);
