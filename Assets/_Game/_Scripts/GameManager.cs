@@ -171,8 +171,6 @@ public class GameManager : MonoBehaviour
 
     public void ChangePlayer(EnemyController newPlayer)
     {
-        ResumeChase();
-
         isPlayerTransition = false;
         
         currentPlayer.possessed = false;
@@ -204,8 +202,6 @@ public class GameManager : MonoBehaviour
 
     void LaunchLimit()
     {
-        ResumeChase();
-
         isPlayerTransition = false;
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
@@ -238,8 +234,7 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse0))
             {
-                PauseChase();
-                currentPlayer.animator.SetTrigger("Attack");
+		currentPlayer.animator.SetTrigger("Attack");
                 isPlayerTransition = true;
                 launchDir = currentPlayer.transform.forward;
                 sword.transform.SetParent(null);

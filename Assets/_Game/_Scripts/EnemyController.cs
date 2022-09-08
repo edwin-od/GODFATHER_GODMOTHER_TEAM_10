@@ -33,6 +33,7 @@ public class EnemyController : MonoBehaviour
 
     bool attacking = false;
     bool hit = false;
+    bool dead = false;
     
     private void Awake()
     {
@@ -89,6 +90,8 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        dead = true;
+
         animator.SetTrigger("Death");
 
         GameManager.Instance.RemoveEnemy(this);
@@ -156,7 +159,7 @@ public class EnemyController : MonoBehaviour
         if (elapsedAttack > 0)
             elapsedAttack -= Time.deltaTime;
 
-        if (elapsedAttack <= 0)
+        if (!dead && elapsedAttack <= 0)
         {
             if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= 2)
             {
@@ -176,11 +179,13 @@ public class EnemyController : MonoBehaviour
     public void CorruptionStart()
     {
         GameManager.Instance.isPlayerCorrupted = true;
+        GameManager.Instance.PauseChase();
     }
 
     public void CorruptionEnd()
     {
         GameManager.Instance.isPlayerCorrupted = false;
+        GameManager.Instance.ResumeChase();
     }
 
     public void AttackStart()
