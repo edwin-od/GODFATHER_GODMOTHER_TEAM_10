@@ -137,7 +137,11 @@ public class GameManager : MonoBehaviour
         currentPlayer.tag = "Enemy";
         currentPlayer.possessed = false;
         currentPlayer.agent.enabled = true;
-        
+        if (currentPlayer.GetComponent<Animator>())
+        {
+            currentPlayer.GetComponent<Animator>().SetBool("Corrupted", false);
+        }
+
         currentPlayer = newPlayer;
         currentPlayer.agent.enabled = false;
         currentPlayer.possessed = true;
