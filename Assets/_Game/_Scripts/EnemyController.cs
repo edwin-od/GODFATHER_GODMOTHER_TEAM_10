@@ -92,7 +92,9 @@ public class EnemyController : MonoBehaviour
         GameManager.Instance.RemoveEnemy(this);
         agent.enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
-        StartCoroutine(Death());
+
+        if (this != GameManager.Instance.Player) 
+            StartCoroutine(Death());
     }
 
     IEnumerator Death()
