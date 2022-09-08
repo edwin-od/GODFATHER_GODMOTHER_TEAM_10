@@ -58,23 +58,24 @@ public class EnemyController : MonoBehaviour
         {
             Die();
         }
-        else
-        {
-            //animator.SetTrigger("Damage");
-        }
-
     }
 
     private void Die()
     {
         animator.SetTrigger("Death");
-        //TODO implements Die method
-        //...
 
         GameManager.Instance.RemoveEnemy(this);
-        
+        agent.enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
+        StartCoroutine(Death());
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
+
 
     public void Attack()
     {
@@ -98,13 +99,19 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         if (this == GameManager.Instance.Player) return;
-        animator.SetFloat("Speed", agent.velocity.magnitude);
+        if (agent.enabled)
+        {
+            animator.SetFloat("Speed", agent.velocity.magnitude);
+        }
         if (true)//GameManager.Instance.moving)
         {
             elapsed += Time.deltaTime;
             if (elapsed > rate)
             {
-                agent?.SetDestination(GameManager.Instance.Player.transform.position);
+                if (agent.enabled)
+                {
+                    agent.SetDestination(GameManager.Instance.Player.transform.position);
+                }
                 elapsed = 0;
             }
         }
