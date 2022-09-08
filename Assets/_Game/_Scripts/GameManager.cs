@@ -234,7 +234,6 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse0))
             {
-                currentPlayer.animator.ResetTrigger("Attack");
                 currentPlayer.animator.SetTrigger("Attack");
                 isPlayerTransition = true;
                 launchDir = currentPlayer.transform.forward;

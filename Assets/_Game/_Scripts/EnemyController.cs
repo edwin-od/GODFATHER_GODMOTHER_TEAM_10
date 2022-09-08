@@ -23,7 +23,8 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private SkinnedMeshRenderer mesh;
 
-    [SerializeField] private ParticleSystem particle;
+    [SerializeField] private ParticleSystem corruptionParticle;
+    [SerializeField] private ParticleSystem bloodParticle;
 
     public Rigidbody rb;
 
@@ -78,7 +79,7 @@ public class EnemyController : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, enemySO.hp);
-        
+        bloodParticle.Play();
         if (possessed)
             GameManager.Instance.UpdateHealthUI();
 
@@ -131,12 +132,12 @@ public class EnemyController : MonoBehaviour
     
     public void ParticleStart()
     {
-        particle.Play();
+        corruptionParticle.Play();
     }
 
     public void ParticleEnd()
     {
-        particle.Stop();
+        corruptionParticle.Stop();
     }
 
     private float elapsedAgent = 0;
