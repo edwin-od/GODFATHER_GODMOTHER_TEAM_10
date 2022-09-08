@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] float stageStartDelay = 5;
     [SerializeField] float spawnRate = 2;
 
     float elapsed = 0;
@@ -40,22 +41,27 @@ public class SpawnManager : MonoBehaviour
     void NewStage()
     {
         spawnPoints = GameManager.Instance.CurrentEnemySpawnsPoints;
+        elapsed = -stageStartDelay;
     }
 
     private void Update()
     {
-        elapsed += Time.deltaTime;
-        if (elapsed > spawnRate)
+        if (enemies.Count > 0)
         {
-            elapsed = 0;
-
-            if (enemies.Count > 0)
+            elapsed += Time.deltaTime;
+            if (elapsed > spawnRate)
             {
+                elapsed = 0;
+
                 int index = Random.Range(0, enemies.Count);
                 EnemySO enemy = enemies[index];
                 Instantiate(enemy.prefab, spawnPoints[Random.Range(0, spawnPoints.Length)]).SetParent(null);
                 enemies.RemoveAt(index);
             }
+        }
+        else if (elapsed != 0)
+        {
+            elapsed = 0;
         }
     }
 }

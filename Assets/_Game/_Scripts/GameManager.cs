@@ -109,6 +109,10 @@ public class GameManager : MonoBehaviour
     int currentStage = 0;
     int currentEnemyWave = 0;
 
+    public Action OnPlayerStartMoving;
+    public Action OnPlayerStopMoving;
+    private bool moving = false;
+
     private Image[] hps;
 
     private void Start()
@@ -128,12 +132,17 @@ public class GameManager : MonoBehaviour
 
     public void ChangePlayer(EnemyController newPlayer)
     {
+        isPlayerTransition = false;
+        
         currentPlayer.tag = "Enemy";
         currentPlayer.possessed = false;
+        currentPlayer.agent.enabled = true;
+        
         currentPlayer = newPlayer;
+        currentPlayer.agent.enabled = false;
         currentPlayer.possessed = true;
         currentPlayer.tag = "Player";
-        isPlayerTransition = false;
+        
         sword.transform.SetParent(currentPlayer.transform);
         sword.transform.localPosition = new Vector3(0, 0.4f, 0.6f);
         sword.transform.localEulerAngles = new Vector3(90, 0, 0);
@@ -155,6 +164,19 @@ public class GameManager : MonoBehaviour
         if (currentPlayer && !isPlayerTransition)
         {
             Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized * Time.deltaTime * playerSpeed;
+            
+            float mg = dir.sqrMagnitude;
+            if (!moving && mg > 0)
+            {
+                moving = true;
+                OnPlayerStartMoving?.Invoke();
+            }
+            else if (moving && mg == 0)
+            {
+                moving = false;
+                OnPlayerStopMoving?.Invoke();
+            }
+            
             if (Input.GetKeyDown(KeyCode.JoystickButton3))
             {
                 isPlayerTransition = true;
