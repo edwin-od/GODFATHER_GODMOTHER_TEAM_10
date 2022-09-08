@@ -95,8 +95,11 @@ public class EnemyController : MonoBehaviour
         agent.enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
 
-        if (this != GameManager.Instance.Player) 
+        if (this != GameManager.Instance.Player)
+        {
+            rb.useGravity = false;
             StartCoroutine(Death());
+        }
     }
 
     IEnumerator Death()
