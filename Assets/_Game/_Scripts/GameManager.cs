@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     public Action OnNewStage;
 
     [HideInInspector] public bool isPlayerTransition = false;
-
+    
     [SerializeField] private GameObject sword;
     [SerializeField] private float swordSpeed;
     private Vector3 launchDir;
@@ -108,6 +108,10 @@ public class GameManager : MonoBehaviour
 
     int currentStage = 0;
     int currentEnemyWave = 0;
+
+    public Action OnPlayerStartMoving;
+    public Action OnPlayerStopMoving;
+    private bool moving = false;
 
     private Image[] hps;
 
@@ -128,16 +132,24 @@ public class GameManager : MonoBehaviour
 
     public void ChangePlayer(EnemyController newPlayer)
     {
+        isPlayerTransition = false;
+        
         currentPlayer.tag = "Enemy";
         currentPlayer.possessed = false;
+        currentPlayer.agent.enabled = true;
+        
         currentPlayer = newPlayer;
+        currentPlayer.agent.enabled = false;
         currentPlayer.possessed = true;
         currentPlayer.tag = "Player";
-        isPlayerTransition = false;
+        
         sword.transform.SetParent(currentPlayer.transform);
         sword.transform.localPosition = new Vector3(0, 0.4f, 0.6f);
         sword.transform.localEulerAngles = new Vector3(90, 0, 0);
-
+        if (currentPlayer.GetComponent<Animator>())
+        {
+            currentPlayer.GetComponent<Animator>()?.SetTrigger("Corruption");
+        }
         SpawnHPs();
     }
 
@@ -155,12 +167,29 @@ public class GameManager : MonoBehaviour
         if (currentPlayer && !isPlayerTransition)
         {
             Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized * Time.deltaTime * playerSpeed;
+            
+            float mg = dir.sqrMagnitude;
+            if (!moving && mg > 0)
+            {
+                moving = true;
+                OnPlayerStartMoving?.Invoke();
+            }
+            else if (moving && mg == 0)
+            {
+                moving = false;
+                OnPlayerStopMoving?.Invoke();
+            }
+            
             if (Input.GetKeyDown(KeyCode.JoystickButton3))
             {
                 isPlayerTransition = true;
                 launchDir = currentPlayer.transform.forward;
                 sword.transform.SetParent(null);
                 launchLimit = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                currentPlayer.Attack();
             }
             currentPlayer.transform.position += dir;
             currentPlayer.transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? currentPlayer.transform.forward : dir.normalized);

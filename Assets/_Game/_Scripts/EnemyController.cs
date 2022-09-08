@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
@@ -12,8 +15,14 @@ public class EnemyController : MonoBehaviour
 
     [HideInInspector] public bool possessed = false;
 
+    [HideInInspector] public NavMeshAgent agent;
+
+    private bool playerMoving = false;
+
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        
         Init(enemySO);
     }
 
@@ -24,6 +33,9 @@ public class EnemyController : MonoBehaviour
         currentHealth = enemySO.hp;
 
         GameManager.Instance.AddEnemy(this);
+        
+        GameManager.Instance.OnPlayerStartMoving += PlayerStartedMoving;
+        GameManager.Instance.OnPlayerStopMoving += PlayerStoppedMoving;
     }
 
     public float currentHealth
@@ -48,22 +60,58 @@ public class EnemyController : MonoBehaviour
         {
             //animator.SetTrigger("Damage");
         }
-        Debug.Log("Current health : "+currentHealth);
 
     }
 
     private void Die()
     {
-        //animator.SetTrigger("Death");
+        animator.SetTrigger("Death");
         //TODO implements Die method
         //...
 
         GameManager.Instance.RemoveEnemy(this);
+        
+        GameManager.Instance.OnPlayerStartMoving -= PlayerStartedMoving;
+        GameManager.Instance.OnPlayerStopMoving -= PlayerStoppedMoving;
+        
+        Destroy(gameObject);
     }
 
     //ATTACK TO DO
     public void Attack()
     {
-        //animator.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
+    }
+
+    public void Corruption()
+    {
+        animator.SetBool("Corrupted", true);
+    }
+
+    void PlayerStartedMoving()
+    {
+        if (GameManager.Instance.isPlayerTransition) return;
+
+        playerMoving = true;
+    }
+    
+    void PlayerStoppedMoving()
+    {
+        playerMoving = false;
+    }
+
+    private float elapsed = 0;
+    private float rate = 0.25f;
+    private void Update()
+    {
+        if (playerMoving)
+        {
+            elapsed += Time.deltaTime;
+            if (elapsed > rate)
+            {
+                agent?.SetDestination(GameManager.Instance.Player.transform.position);
+                elapsed = 0;
+            }
+        }
     }
 }
