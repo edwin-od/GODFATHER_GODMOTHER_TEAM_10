@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
         currentPlayer.agent.enabled = true;
         if (currentPlayer.GetComponent<Animator>())
         {
-            currentPlayer.GetComponent<Animator>().SetBool("Corrupted", false);
+            currentPlayer.Transition();
         }
 
         currentPlayer = newPlayer;
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
         
         if (currentPlayer.GetComponent<Animator>())
         {
-            currentPlayer.GetComponent<Animator>()?.SetTrigger("Corruption");
+            currentPlayer.Transition();
         }
         SpawnHPs();
     }
@@ -192,8 +192,9 @@ public class GameManager : MonoBehaviour
                 sword.transform.SetParent(null);
                 launchLimit = 0;
             }
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.JoystickButton2))
             {
+                Debug.Log("Hey");
                 currentPlayer.Attack();
             }
             currentPlayer.transform.position += dir;
