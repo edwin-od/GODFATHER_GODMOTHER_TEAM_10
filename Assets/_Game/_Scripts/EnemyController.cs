@@ -29,6 +29,8 @@ public class EnemyController : MonoBehaviour
 
     public Transform prediction;
 
+    public float attackDistance = 3;
+
     bool attacking = false;
     bool hit = false;
     
@@ -147,7 +149,7 @@ public class EnemyController : MonoBehaviour
 
         if (elapsedAttack <= 0)
         {
-            if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= 2)
+            if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= attackDistance)
             {
                 if (!attacking)
                 {
