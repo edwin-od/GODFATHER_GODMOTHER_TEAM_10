@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     {
         if (e == currentPlayer)
         {
-            // Game Over
+            // LOSE
         }
 
         currentEnemies.Remove(e);
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 
                 if (currentStage >= stages.Length)
                 {
-                    // Game End
+                    // WIN
                     return;
                 }
                 OnNewStage?.Invoke();
@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
     public Action OnNewStage;
 
     [HideInInspector] public bool isPlayerTransition = false;
+    [HideInInspector] public bool isPlayerCorrupted = false;
     
     [SerializeField] private GameObject sword;
     private SwordBehaviour swordBehaviour;
@@ -195,7 +196,7 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentPlayer && !isPlayerTransition)
+        if (currentPlayer && !isPlayerTransition && !isPlayerCorrupted)
         {
             Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized;
             currentPlayer.transform.rotation = Quaternion.LookRotation(dir.sqrMagnitude == 0 ? currentPlayer.transform.forward : dir);

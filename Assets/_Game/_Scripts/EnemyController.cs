@@ -104,11 +104,10 @@ public class EnemyController : MonoBehaviour
     private float rate = 0.25f;
     private void Update()
     {
+        animator.SetFloat("Speed", rb.velocity.magnitude);
+
         if (this == GameManager.Instance.Player) return;
-        if (agent.enabled)
-        {
-            animator.SetFloat("Speed", agent.velocity.magnitude);
-        }
+
         if (true)//GameManager.Instance.moving)
         {
             elapsed += Time.deltaTime;
@@ -126,5 +125,15 @@ public class EnemyController : MonoBehaviour
                 Attack();
             }
         }
+    }
+
+    public void CorruptionStart()
+    {
+        GameManager.Instance.isPlayerCorrupted = true;
+    }
+
+    public void CorruptionEnd()
+    {
+        GameManager.Instance.isPlayerCorrupted = false;
     }
 }
