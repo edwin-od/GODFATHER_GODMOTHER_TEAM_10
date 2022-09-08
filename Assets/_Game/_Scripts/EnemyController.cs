@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody))]
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
@@ -17,9 +17,15 @@ public class EnemyController : MonoBehaviour
 
     public NavMeshAgent agent;
     public Transform swordContainer;
+
+    public Rigidbody rb;
+
+    public CharacterController cont;
     
     private void Start()
     {
+        cont = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         
         Init(enemySO);
@@ -73,6 +79,11 @@ public class EnemyController : MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger("Attack");
+    }
+
+    public void StopAttack()
+    {
+        GameManager.Instance.StopSwing();
     }
 
     public void Transition()

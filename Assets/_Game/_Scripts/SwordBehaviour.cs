@@ -5,25 +5,22 @@ using UnityEngine;
 public class SwordBehaviour : MonoBehaviour
 {
     [SerializeField] private LayerMask obstaclesLayers;
+    [HideInInspector] public bool swinging;
 
     private void OnTriggerEnter(Collider other)
     {
         EnemyController perso = other.GetComponent<EnemyController>();
         if (perso && GameManager.Instance.Player != perso)
         {
-            if (!GameManager.Instance.isPlayerTransition)
-            {
-                perso.ApplyDamage(GameManager.Instance.Player.enemySO.dmg);
-                Debug.Log("Hit : " + perso.currentHealth);
-                Debug.Log("épée hp : " + GameManager.Instance.Player.currentHealth);
-
-            }
-            else
+            if (GameManager.Instance.isPlayerTransition)
             {
                 GameManager.Instance.ChangePlayer(other.GetComponent<EnemyController>());
             }
+            if (swinging)
+            {
+                perso.ApplyDamage(perso.enemySO.dmg);
+            }
         }
-        
         else if (obstaclesLayers == (obstaclesLayers | (1 << other.gameObject.layer)))
         {
             RaycastHit hit;
