@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool isPlayerTransition = false;
     
     [SerializeField] private GameObject sword;
+    [SerializeField] private SwordBehaviour swordBehaviour;
     [SerializeField] private float swordSpeed;
     private Vector3 launchDir;
     private float launchLimit;
@@ -117,6 +118,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        swordBehaviour = sword.GetComponent<SwordBehaviour>();
         StartGame();
     }
 
@@ -194,8 +196,8 @@ public class GameManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.JoystickButton2))
             {
-                Debug.Log("Hey");
                 currentPlayer.Attack();
+                swordBehaviour.swinging = true;
             }
             currentPlayer.transform.position += dir;
             currentPlayer.transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? currentPlayer.transform.forward : dir.normalized);
@@ -211,6 +213,11 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    public void StopSwing()
+    {
+        swordBehaviour.swinging = false;
+    }
+
     private void SpawnHPs()
     {
         for (int i = 0; i < hpContainer.childCount; ++i)

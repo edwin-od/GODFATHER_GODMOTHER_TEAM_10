@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Medium
   m_EditorClassIdentifier: 
   hp: 3
+  dmg: 1
   type: 0
   prefab: {fileID: 8272102872719562968, guid: 3317aeb5bb8ce224386f5c8baee524c1, type: 3}
