@@ -267,6 +267,7 @@ public class GameManager : MonoBehaviour
 
     public void StopSwing()
     {
+
         swordBehaviour.swinging = false;
     }
 
