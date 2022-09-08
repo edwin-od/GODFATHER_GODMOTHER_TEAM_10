@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool isPlayerTransition = false;
     
     [SerializeField] private GameObject sword;
-    [SerializeField] private SwordBehaviour swordBehaviour;
+    private SwordBehaviour swordBehaviour;
     [SerializeField] private float swordSpeed;
     public Vector3 launchDir;
     private float launchLimit;
