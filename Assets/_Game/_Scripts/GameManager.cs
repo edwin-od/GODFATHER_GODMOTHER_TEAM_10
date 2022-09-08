@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject sword;
     [SerializeField] private SwordBehaviour swordBehaviour;
     [SerializeField] private float swordSpeed;
-    private Vector3 launchDir;
+    public Vector3 launchDir;
     private float launchLimit;
 
     int currentStage = 0;
@@ -116,18 +116,21 @@ public class GameManager : MonoBehaviour
 
     private Image[] hps;
 
+    public LineRenderer aimLine;
+
     private void Start()
     {
         swordBehaviour = sword.GetComponent<SwordBehaviour>();
         StartGame();
     }
-
+    
     void StartGame()
     {
         currentPlayer = Instantiate(playerSpawnType.prefab, playerSpawn).GetComponent<EnemyController>();
         currentPlayer.transform.SetParent(null);
         ChangePlayer(currentPlayer);
-
+        aimLine = currentPlayer.GetComponent<LineRenderer>();
+        
         OnNewStage?.Invoke();
         OnNewEnemyWave?.Invoke();
     }
@@ -148,6 +151,8 @@ public class GameManager : MonoBehaviour
         currentPlayer.agent.enabled = false;
         currentPlayer.possessed = true;
         currentPlayer.tag = "Player";
+        
+        aimLine = currentPlayer.GetComponent<LineRenderer>();
 
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
@@ -175,6 +180,8 @@ public class GameManager : MonoBehaviour
         {
             sword.transform.position += launchDir.normalized * swordSpeed * Time.deltaTime;
             launchLimit += Time.deltaTime;
+            Debug.Log("launchDir : " + launchDir);
+            
             if (launchLimit >= 2)
             {
                 LaunchLimit();
@@ -202,8 +209,31 @@ public class GameManager : MonoBehaviour
                 OnPlayerStopMoving?.Invoke();
             }
 
-            if (Input.GetKeyDown(KeyCode.JoystickButton3))
+            if(Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode.Mouse0))
             {
+                RaycastHit hit;
+                Ray ray = new Ray(currentPlayer.transform.position, currentPlayer.transform.forward);
+                Physics.Raycast(ray, out hit);
+                Debug.Log(hit.point);
+                aimLine.positionCount = 2;
+                aimLine.SetPosition(0, currentPlayer.transform.position);
+                aimLine.SetPosition(1, ray.GetPoint(50));
+                aimLine.enabled = true;
+                LayerMask obstacle = LayerMask.GetMask("Obstacle");
+                if (Physics.Raycast(ray, out hit, obstacle))
+                {
+                    aimLine.positionCount = 3;
+                    aimLine.SetPosition(1, hit.point);
+                    Vector3 reflectVec = Vector3.Reflect(ray.direction, hit.normal);
+                    ray = new Ray(hit.point, reflectVec);
+                    //Physics.Raycast(ray, out hit);
+                    aimLine.SetPosition(2, ray.GetPoint(50));
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                aimLine.enabled = false;
                 isPlayerTransition = true;
                 launchDir = currentPlayer.transform.forward;
                 sword.transform.SetParent(null);

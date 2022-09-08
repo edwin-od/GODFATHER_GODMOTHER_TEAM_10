@@ -114,6 +114,11 @@ public class EnemyController : MonoBehaviour
                 }
                 elapsed = 0;
             }
+            
+            if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= 2)
+            {
+                Attack();
+            }
         }
     }
 }
