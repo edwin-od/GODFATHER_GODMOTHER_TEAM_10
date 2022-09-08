@@ -23,13 +23,13 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private SkinnedMeshRenderer mesh;
 
+    [SerializeField] private ParticleSystem particle;
+
     public Rigidbody rb;
 
     public CapsuleCollider col;
 
     public Transform prediction;
-
-    public float attackDistance = 3;
 
     bool attacking = false;
     bool hit = false;
@@ -95,11 +95,8 @@ public class EnemyController : MonoBehaviour
         agent.enabled = false;
         GetComponent<CapsuleCollider>().enabled = false;
 
-        if (this != GameManager.Instance.Player)
-        {
-            rb.useGravity = false;
+        if (this != GameManager.Instance.Player) 
             StartCoroutine(Death());
-        }
     }
 
     IEnumerator Death()
@@ -126,6 +123,15 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger("Transition");
     }
     
+    public void ParticleStart()
+    {
+        particle.Play();
+    }
+
+    public void ParticleEnd()
+    {
+        particle.Stop();
+    }
 
     private float elapsedAgent = 0;
     private float rateAgent = 0.25f;
@@ -152,7 +158,7 @@ public class EnemyController : MonoBehaviour
 
         if (elapsedAttack <= 0)
         {
-            if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= attackDistance)
+            if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= 2)
             {
                 if (!attacking)
                 {

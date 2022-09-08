@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse0))
             {
                 PauseChase();
-
+                currentPlayer.animator.SetTrigger("Attack");
                 isPlayerTransition = true;
                 launchDir = currentPlayer.transform.forward;
                 sword.transform.SetParent(null);
