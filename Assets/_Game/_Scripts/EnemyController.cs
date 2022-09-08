@@ -126,7 +126,7 @@ public class EnemyController : MonoBehaviour
     private float elapsedAttack = 0;
     private void Update()
     {
-        animator.SetFloat("Speed", rb.velocity.magnitude);
+        animator.SetFloat("Speed", !agent.enabled && GameManager.Instance.Player != this ? 0 : rb.velocity.magnitude);
 
         if (this == GameManager.Instance.Player) return;
 

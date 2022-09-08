@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour
         if (e == currentPlayer)
         {
             // LOSE
+            StopEverything();
+
         }
 
         currentEnemies.Remove(e);
@@ -90,11 +92,42 @@ public class GameManager : MonoBehaviour
                 if (currentStage >= stages.Length)
                 {
                     // WIN
+                    StopEverything();
+
                     return;
                 }
                 OnNewStage?.Invoke();
             }
             OnNewEnemyWave?.Invoke();
+        }
+    }
+
+    void StopEverything()
+    {
+        foreach (var e in currentEnemies)
+        {
+            e.gameObject.SetActive(false);
+        }
+        currentPlayer.gameObject.SetActive(false);
+    }
+
+    public void PauseChase()
+    {
+        foreach (var e in currentEnemies)
+        {
+            if (e == currentPlayer) continue;
+            e.agent.enabled = false;
+            e.rb.useGravity = false;
+        }
+    }
+
+    public void ResumeChase()
+    {
+        foreach (var e in currentEnemies)
+        {
+            if (e == currentPlayer) continue;
+            e.agent.enabled = true;
+            e.rb.useGravity = true;
         }
     }
 
@@ -118,7 +151,6 @@ public class GameManager : MonoBehaviour
 
     private Image[] hps;
 
-    //public LineRenderer aimLine;
 
     private void Start()
     {
@@ -132,7 +164,6 @@ public class GameManager : MonoBehaviour
         currentPlayer.transform.SetParent(null);
         currentPlayer.transform.position = playerSpawn.position;
         ChangePlayer(currentPlayer);
-        //aimLine = currentPlayer.GetComponent<LineRenderer>();
         
         OnNewStage?.Invoke();
         OnNewEnemyWave?.Invoke();
@@ -140,9 +171,10 @@ public class GameManager : MonoBehaviour
 
     public void ChangePlayer(EnemyController newPlayer)
     {
+        ResumeChase();
+
         isPlayerTransition = false;
         
-        //currentPlayer.tag = "Enemy";
         currentPlayer.possessed = false;
         currentPlayer.SwitchMaterial(false);
         currentPlayer.agent.enabled = true;
@@ -157,9 +189,6 @@ public class GameManager : MonoBehaviour
         currentPlayer.col.isTrigger = false;
         currentPlayer.possessed = true;
         currentPlayer.SwitchMaterial(true);
-        //currentPlayer.tag = "Player";
-        
-        //aimLine = currentPlayer.GetComponent<LineRenderer>();
 
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
@@ -175,11 +204,12 @@ public class GameManager : MonoBehaviour
 
     void LaunchLimit()
     {
+        ResumeChase();
+
         isPlayerTransition = false;
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
         sword.transform.localEulerAngles = new Vector3(7.469854f, 168.0391f, 164.1708f);
-        //currentPlayer.tag = "Player";
     }
 
     private void Update()
@@ -195,46 +225,21 @@ public class GameManager : MonoBehaviour
                 LaunchLimit();
             }
         }
-    }
 
-    private void FixedUpdate()
-    {
         if (currentPlayer && !isPlayerTransition && !isPlayerCorrupted)
         {
-            Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized;
-            currentPlayer.transform.rotation = Quaternion.LookRotation(dir.sqrMagnitude == 0 ? currentPlayer.transform.forward : dir);
-            currentPlayer.rb.AddForce(dir * playerAcceleration, ForceMode.Force);
-            if (currentPlayer.rb.velocity.magnitude > playerSpeed)
-            {
-                currentPlayer.rb.velocity = currentPlayer.rb.velocity.normalized * playerSpeed;
-            }
-
-            if(Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode.Mouse0))
             {
                 RaycastHit hit;
                 Physics.Raycast(new Ray(currentPlayer.transform.position, currentPlayer.transform.forward), out hit, predictionLayers);
                 currentPlayer.prediction.gameObject.SetActive(true);
                 currentPlayer.prediction.localScale = new Vector3(2, 2, (hit.transform ? hit.distance : 1000) * 2);
-
-                //aimLine.positionCount = 2;
-                //aimLine.SetPosition(0, currentPlayer.transform.position);
-                //aimLine.SetPosition(1, ray.GetPoint(50));
-                //aimLine.enabled = true;
-                //LayerMask obstacle = LayerMask.GetMask("Obstacle");
-                //if (Physics.Raycast(ray, out hit, obstacle))
-                //{
-                //    aimLine.positionCount = 3;
-                //    aimLine.SetPosition(1, hit.point);
-                //    Vector3 reflectVec = Vector3.Reflect(ray.direction, hit.normal);
-                //    ray = new Ray(hit.point, reflectVec);
-                //    //Physics.Raycast(ray, out hit);
-                //    aimLine.SetPosition(2, ray.GetPoint(50));
-                //}
             }
 
             if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse0))
             {
-                //aimLine.enabled = false;
+                PauseChase();
+
                 isPlayerTransition = true;
                 launchDir = currentPlayer.transform.forward;
                 sword.transform.SetParent(null);
@@ -247,6 +252,20 @@ public class GameManager : MonoBehaviour
             {
                 currentPlayer.Attack();
                 swordBehaviour.swinging = true;
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentPlayer && !isPlayerTransition && !isPlayerCorrupted)
+        {
+            Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized;
+            currentPlayer.transform.rotation = Quaternion.LookRotation(dir.sqrMagnitude == 0 ? currentPlayer.transform.forward : dir);
+            currentPlayer.rb.AddForce(dir * playerAcceleration, ForceMode.Force);
+            if (currentPlayer.rb.velocity.magnitude > playerSpeed)
+            {
+                currentPlayer.rb.velocity = currentPlayer.rb.velocity.normalized * playerSpeed;
             }
         }
     }
