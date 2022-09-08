@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6e5061d4-86c2-49bc-8fd5-6b38713e44f1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/KIOSKE.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/KIOSKE.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/bord toit.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/bord toit.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/sol lumineux.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/sol lumineux.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/sol principale.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/sol principale.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/6gqq1c1a.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/6gqq1c1a.bmp.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2 1.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2 1.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2 2.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2 2.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/clcyq7a6.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/clcyq7a6.bmp.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/digital paint VERSION BRUH.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/digital paint VERSION BRUH.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/i3exyx07.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/i3exyx07.bmp.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/i950k0c5.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/i950k0c5.bmp.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/kioske copie 1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/kioske copie 1.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/oyhod4bw.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/oyhod4bw.bmp.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol 2  copie 2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol 2  copie 2.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol lumineux  copie 2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol lumineux  copie 2.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol principale  copie.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol principale  copie.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/taule.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/taule.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/AttackSword.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/AttackSword.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/RangedEnemy.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/RangedEnemy.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/TV1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV1.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/New Universal Render Pipeline Asset_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/New Universal Render Pipeline Asset_Renderer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/URP-PSX/Assets/UniversalRenderPipelineAsset_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/URP-PSX/Assets/UniversalRenderPipelineAsset_Renderer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/Scriptable Objects/Enemies/Medium.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/Scriptable Objects/Enemies/Medium.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/_Prefabs/Enemies/RangedEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/_Prefabs/Enemies/RangedEnemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/_Scripts/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/_Scripts/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/_Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/_Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/_Scripts/SwordBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/_Scripts/SwordBehaviour.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2EUOrVpqZHITG4JViCV02plrWPv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6e5061d4-86c2-49bc-8fd5-6b38713e44f1" name="Default Changelist" comment="" />
+      <created>1662646897603</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1662646897603</updated>
+    </task>
+    <servers />
+  </component>
+</project>
