@@ -60,13 +60,12 @@ public class EnemyController : MonoBehaviour
         {
             //animator.SetTrigger("Damage");
         }
-        Debug.Log("Current health : "+currentHealth);
 
     }
 
     private void Die()
     {
-        //animator.SetTrigger("Death");
+        animator.SetTrigger("Death");
         //TODO implements Die method
         //...
 
@@ -81,7 +80,12 @@ public class EnemyController : MonoBehaviour
     //ATTACK TO DO
     public void Attack()
     {
-        //animator.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
+    }
+
+    public void Corruption()
+    {
+        animator.SetBool("Corrupted", true);
     }
 
     void PlayerStartedMoving()

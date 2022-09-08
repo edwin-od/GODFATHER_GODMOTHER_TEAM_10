@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     public Action OnNewStage;
 
     [HideInInspector] public bool isPlayerTransition = false;
-
+    
     [SerializeField] private GameObject sword;
     [SerializeField] private float swordSpeed;
     private Vector3 launchDir;
@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
         sword.transform.SetParent(currentPlayer.transform);
         sword.transform.localPosition = new Vector3(0, 0.4f, 0.6f);
         sword.transform.localEulerAngles = new Vector3(90, 0, 0);
-
+        currentPlayer.GetComponent<Animator>().SetTrigger("Corruption");
         SpawnHPs();
     }
 
@@ -183,6 +183,10 @@ public class GameManager : MonoBehaviour
                 launchDir = currentPlayer.transform.forward;
                 sword.transform.SetParent(null);
                 launchLimit = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                currentPlayer.Attack();
             }
             currentPlayer.transform.position += dir;
             currentPlayer.transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? currentPlayer.transform.forward : dir.normalized);
