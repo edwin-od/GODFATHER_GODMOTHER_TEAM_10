@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     [HideInInspector] public bool possessed = false;
 
     public NavMeshAgent agent;
+    public Transform swordContainer;
     
     private void Start()
     {
@@ -69,15 +70,15 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //ATTACK TO DO
     public void Attack()
     {
         animator.SetTrigger("Attack");
     }
 
-    public void Corruption()
+    public void Transition()
     {
-        animator.SetBool("Corrupted", true);
+        animator.SetBool("Corrupted", possessed);
+        animator.SetTrigger("Transition");
     }
     
 
@@ -86,7 +87,7 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         if (this == GameManager.Instance.Player) return;
-        
+        animator.SetFloat("Speed", agent.velocity.magnitude);
         if (true)//GameManager.Instance.moving)
         {
             elapsed += Time.deltaTime;
