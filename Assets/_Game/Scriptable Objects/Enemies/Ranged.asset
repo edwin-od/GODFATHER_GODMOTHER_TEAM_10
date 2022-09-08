@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Ranged
   m_EditorClassIdentifier: 
   hp: 2
+  dmg: 1
   type: 2
   prefab: {fileID: 1632385018373941695, guid: d0f5d56974f1b36489371f0c432da312, type: 3}
