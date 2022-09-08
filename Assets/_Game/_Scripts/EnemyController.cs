@@ -48,7 +48,6 @@ public class EnemyController : MonoBehaviour
         {
             //animator.SetTrigger("Damage");
         }
-        Debug.Log("Current health : "+currentHealth);
 
     }
 
@@ -65,5 +64,6 @@ public class EnemyController : MonoBehaviour
     public void Attack()
     {
         //animator.SetTrigger("Attack");
+
     }
 }

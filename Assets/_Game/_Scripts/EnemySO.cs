@@ -6,7 +6,8 @@ using UnityEngine;
 public class EnemySO : ScriptableObject
 {
     public int hp;
-    
+    public int dmg;
+
     public GameManager.Dynamic type = GameManager.Dynamic.Type1;
     public Transform prefab;
 }
