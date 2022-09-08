@@ -5,10 +5,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody))]
+[RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody), typeof(CapsuleCollider))]
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    public Animator animator;
 
     public EnemySO enemySO;
     public EnemySO EnemySO => enemySO;
@@ -20,14 +20,19 @@ public class EnemyController : MonoBehaviour
 
     public Rigidbody rb;
 
-    public CharacterController cont;
+    public CapsuleCollider col;
+
+    public Transform prediction;
     
-    private void Start()
+    private void Awake()
     {
-        cont = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-        
+        col = GetComponent<CapsuleCollider>();
+        col.isTrigger = true;
+
+        prediction.gameObject.SetActive(false);
+
         Init(enemySO);
     }
 

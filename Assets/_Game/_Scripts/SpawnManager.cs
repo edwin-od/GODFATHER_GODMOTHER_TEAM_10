@@ -55,7 +55,10 @@ public class SpawnManager : MonoBehaviour
 
                 int index = Random.Range(0, enemies.Count);
                 EnemySO enemy = enemies[index];
-                Instantiate(enemy.prefab, spawnPoints[Random.Range(0, spawnPoints.Length)]).SetParent(null);
+                int spInd = Random.Range(0, spawnPoints.Length);
+                Transform enemyInstance = Instantiate(enemy.prefab, spawnPoints[spInd]);
+                enemyInstance.SetParent(null);
+                enemyInstance.position = spawnPoints[spInd].position;
                 enemies.RemoveAt(index);
             }
         }

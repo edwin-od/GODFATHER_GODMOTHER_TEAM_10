@@ -10,14 +10,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite fullHeart;
     [SerializeField] Sprite halfHeart;
     [SerializeField] Sprite emptyHeart;
-    [SerializeField] Transform hpContainer;
+    [SerializeField] RectTransform hpContainer;
 
     [SerializeField] Transform playerSpawn;
     [SerializeField] EnemySO playerSpawnType;
     
+    [SerializeField] float playerAcceleration = 750;
     [SerializeField] float playerSpeed = 6;
+
+    [SerializeField] float heartUIDimension = 50;
     
     [SerializeField] Stage[] stages;
+
+    [SerializeField] LayerMask predictionLayers;
 
     [System.Serializable]
     public class EnemySpawn
@@ -74,7 +79,7 @@ public class GameManager : MonoBehaviour
 
         currentEnemies.Remove(e);
         
-        if (currentEnemies.Count == 0)
+        if (currentEnemies.Count == 1)
         {
             ++currentEnemyWave;
             if (currentEnemyWave >= stages[currentStage].enemyWaves.Length)
@@ -110,13 +115,9 @@ public class GameManager : MonoBehaviour
     int currentStage = 0;
     int currentEnemyWave = 0;
 
-    public Action OnPlayerStartMoving;
-    public Action OnPlayerStopMoving;
-    [HideInInspector] public bool moving = false;
-
     private Image[] hps;
 
-    public LineRenderer aimLine;
+    //public LineRenderer aimLine;
 
     private void Start()
     {
@@ -128,8 +129,9 @@ public class GameManager : MonoBehaviour
     {
         currentPlayer = Instantiate(playerSpawnType.prefab, playerSpawn).GetComponent<EnemyController>();
         currentPlayer.transform.SetParent(null);
+        currentPlayer.transform.position = playerSpawn.position;
         ChangePlayer(currentPlayer);
-        aimLine = currentPlayer.GetComponent<LineRenderer>();
+        //aimLine = currentPlayer.GetComponent<LineRenderer>();
         
         OnNewStage?.Invoke();
         OnNewEnemyWave?.Invoke();
@@ -139,29 +141,32 @@ public class GameManager : MonoBehaviour
     {
         isPlayerTransition = false;
         
-        currentPlayer.tag = "Enemy";
+        //currentPlayer.tag = "Enemy";
         currentPlayer.possessed = false;
         currentPlayer.agent.enabled = true;
-        if (currentPlayer.GetComponent<Animator>())
+        currentPlayer.col.isTrigger = true;
+        if (currentPlayer.animator)
         {
             currentPlayer.Transition();
         }
 
         currentPlayer = newPlayer;
         currentPlayer.agent.enabled = false;
+        currentPlayer.col.isTrigger = false;
         currentPlayer.possessed = true;
-        currentPlayer.tag = "Player";
+        //currentPlayer.tag = "Player";
         
-        aimLine = currentPlayer.GetComponent<LineRenderer>();
+        //aimLine = currentPlayer.GetComponent<LineRenderer>();
 
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
         sword.transform.localEulerAngles = new Vector3(7.469854f, 168.0391f, 164.1708f);
         
-        if (currentPlayer.GetComponent<Animator>())
+        if (currentPlayer.animator)
         {
             currentPlayer.Transition();
         }
+
         SpawnHPs();
     }
 
@@ -171,7 +176,7 @@ public class GameManager : MonoBehaviour
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
         sword.transform.localEulerAngles = new Vector3(7.469854f, 168.0391f, 164.1708f);
-        currentPlayer.tag = "Player";
+        //currentPlayer.tag = "Player";
     }
 
     private void Update()
@@ -180,7 +185,6 @@ public class GameManager : MonoBehaviour
         {
             sword.transform.position += launchDir.normalized * swordSpeed * Time.deltaTime;
             launchLimit += Time.deltaTime;
-            Debug.Log("launchDir : " + launchDir);
             
             if (launchLimit >= 2)
             {
@@ -193,60 +197,53 @@ public class GameManager : MonoBehaviour
     {
         if (currentPlayer && !isPlayerTransition)
         {
-            Vector3 dir =
-                (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized *
-                Time.deltaTime * playerSpeed;
-
-            float mg = dir.sqrMagnitude;
-            if (!moving && mg > 0)
+            Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized;
+            currentPlayer.transform.rotation = Quaternion.LookRotation(dir.sqrMagnitude == 0 ? currentPlayer.transform.forward : dir);
+            currentPlayer.rb.AddForce(dir * playerAcceleration, ForceMode.Force);
+            if (currentPlayer.rb.velocity.magnitude > playerSpeed)
             {
-                moving = true;
-                OnPlayerStartMoving?.Invoke();
-            }
-            else if (moving && mg == 0)
-            {
-                moving = false;
-                OnPlayerStopMoving?.Invoke();
+                currentPlayer.rb.velocity = currentPlayer.rb.velocity.normalized * playerSpeed;
             }
 
             if(Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode.Mouse0))
             {
                 RaycastHit hit;
-                Ray ray = new Ray(currentPlayer.transform.position, currentPlayer.transform.forward);
-                Physics.Raycast(ray, out hit);
-                Debug.Log(hit.point);
-                aimLine.positionCount = 2;
-                aimLine.SetPosition(0, currentPlayer.transform.position);
-                aimLine.SetPosition(1, ray.GetPoint(50));
-                aimLine.enabled = true;
-                LayerMask obstacle = LayerMask.GetMask("Obstacle");
-                if (Physics.Raycast(ray, out hit, obstacle))
-                {
-                    aimLine.positionCount = 3;
-                    aimLine.SetPosition(1, hit.point);
-                    Vector3 reflectVec = Vector3.Reflect(ray.direction, hit.normal);
-                    ray = new Ray(hit.point, reflectVec);
-                    //Physics.Raycast(ray, out hit);
-                    aimLine.SetPosition(2, ray.GetPoint(50));
-                }
+                Physics.Raycast(new Ray(currentPlayer.transform.position, currentPlayer.transform.forward), out hit, predictionLayers);
+                currentPlayer.prediction.gameObject.SetActive(true);
+                currentPlayer.prediction.localScale = new Vector3(2, 2, (hit.transform ? hit.distance : 1000) * 2);
+
+                //aimLine.positionCount = 2;
+                //aimLine.SetPosition(0, currentPlayer.transform.position);
+                //aimLine.SetPosition(1, ray.GetPoint(50));
+                //aimLine.enabled = true;
+                //LayerMask obstacle = LayerMask.GetMask("Obstacle");
+                //if (Physics.Raycast(ray, out hit, obstacle))
+                //{
+                //    aimLine.positionCount = 3;
+                //    aimLine.SetPosition(1, hit.point);
+                //    Vector3 reflectVec = Vector3.Reflect(ray.direction, hit.normal);
+                //    ray = new Ray(hit.point, reflectVec);
+                //    //Physics.Raycast(ray, out hit);
+                //    aimLine.SetPosition(2, ray.GetPoint(50));
+                //}
             }
 
             if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse0))
             {
-                aimLine.enabled = false;
+                //aimLine.enabled = false;
                 isPlayerTransition = true;
                 launchDir = currentPlayer.transform.forward;
                 sword.transform.SetParent(null);
                 launchLimit = 0;
+
+                currentPlayer.prediction.gameObject.SetActive(false);
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.JoystickButton2))
+            if (!swordBehaviour.swinging && (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.JoystickButton2)))
             {
                 currentPlayer.Attack();
                 swordBehaviour.swinging = true;
             }
-            currentPlayer.cont.Move(dir.normalized * playerSpeed);
-            currentPlayer.transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? currentPlayer.transform.forward : dir.normalized);
         }
     }
 
@@ -257,6 +254,8 @@ public class GameManager : MonoBehaviour
 
     private void SpawnHPs()
     {
+        hpContainer.sizeDelta = new Vector2(heartUIDimension * currentPlayer.EnemySO.hp, heartUIDimension);
+
         for (int i = 0; i < hpContainer.childCount; ++i)
         {
             Destroy(hpContainer.GetChild(i).gameObject);
@@ -269,7 +268,7 @@ public class GameManager : MonoBehaviour
             GameObject NewObj = new GameObject();
             Image NewImage = NewObj.AddComponent<Image>();
             NewImage.sprite = fullHeart;
-            NewObj.GetComponent<RectTransform>().SetParent(hpContainer);
+            NewImage.rectTransform.SetParent(hpContainer);
             NewObj.SetActive(true);
             hps[i] = NewImage;
         }

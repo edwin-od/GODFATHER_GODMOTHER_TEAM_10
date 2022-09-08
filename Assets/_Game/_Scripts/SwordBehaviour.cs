@@ -12,27 +12,20 @@ public class SwordBehaviour : MonoBehaviour
         EnemyController perso = other.GetComponent<EnemyController>();
         if (perso && GameManager.Instance.Player != perso)
         {
-            if (!GameManager.Instance.isPlayerTransition)
+            if (swinging && !GameManager.Instance.isPlayerTransition)
             {
                 perso.ApplyDamage(GameManager.Instance.Player.enemySO.dmg);
             }
-            else
-            if (GameManager.Instance.isPlayerTransition)
+            else if (GameManager.Instance.isPlayerTransition)
             {
-                GameManager.Instance.ChangePlayer(other.GetComponent<EnemyController>());
+                GameManager.Instance.ChangePlayer(perso);
             }
-            if (swinging)
-            {
-                perso.ApplyDamage(perso.enemySO.dmg);
-            }
-        }
-        
+        }/*
         else if (obstaclesLayers == (obstaclesLayers | (1 << other.gameObject.layer)))
         {
-            Debug.Log(("Hit"));
             Vector3 reflectVec = Vector3.Reflect(transform.forward, transform.position.normalized);
             reflectVec.y = 0;
             GameManager.Instance.launchDir = reflectVec;
-        }
+        }*/
     }
 }
