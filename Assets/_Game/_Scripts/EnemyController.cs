@@ -82,6 +82,7 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
+
     public void StopAttack()
     {
         GameManager.Instance.StopSwing();
@@ -113,6 +114,11 @@ public class EnemyController : MonoBehaviour
                     agent.SetDestination(GameManager.Instance.Player.transform.position);
                 }
                 elapsed = 0;
+            }
+            
+            if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= 2)
+            {
+                Attack();
             }
         }
     }
