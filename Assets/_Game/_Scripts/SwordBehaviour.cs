@@ -30,7 +30,6 @@ public class SwordBehaviour : MonoBehaviour
             Ray ray = new Ray(transform.position, Vector3.forward);
             Physics.Raycast(ray, out hit);
             Vector3 reflectVec = Vector3.Reflect(Vector3.forward, hit.normal);
-
         }
     }
 }

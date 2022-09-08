@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        //animator.SetTrigger("Death");
+        animator.SetTrigger("Death");
         //TODO implements Die method
         //...
 
@@ -63,7 +63,11 @@ public class EnemyController : MonoBehaviour
     //ATTACK TO DO
     public void Attack()
     {
-        //animator.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
+    }
 
+    public void Corruption()
+    {
+        animator.SetBool("Corrupted", true);
     }
 }
