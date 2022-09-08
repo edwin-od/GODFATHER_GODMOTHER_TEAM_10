@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
 
     [HideInInspector] public bool possessed = false;
 
-    [HideInInspector] public NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     private bool playerMoving = false;
 
