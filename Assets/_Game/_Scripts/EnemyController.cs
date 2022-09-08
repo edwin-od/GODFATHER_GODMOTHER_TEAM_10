@@ -104,6 +104,8 @@ public class EnemyController : MonoBehaviour
     private float rate = 0.25f;
     private void Update()
     {
+        if (this == GameManager.Instance.Player) return;
+        
         if (playerMoving)
         {
             elapsed += Time.deltaTime;
