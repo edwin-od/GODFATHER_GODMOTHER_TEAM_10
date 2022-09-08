@@ -146,7 +146,10 @@ public class GameManager : MonoBehaviour
         sword.transform.SetParent(currentPlayer.transform);
         sword.transform.localPosition = new Vector3(0, 0.4f, 0.6f);
         sword.transform.localEulerAngles = new Vector3(90, 0, 0);
-        currentPlayer.GetComponent<Animator>().SetTrigger("Corruption");
+        if (currentPlayer.GetComponent<Animator>())
+        {
+            currentPlayer.GetComponent<Animator>()?.SetTrigger("Corruption");
+        }
         SpawnHPs();
     }
 
