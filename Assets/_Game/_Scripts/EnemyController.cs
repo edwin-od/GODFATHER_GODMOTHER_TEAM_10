@@ -18,6 +18,11 @@ public class EnemyController : MonoBehaviour
     public NavMeshAgent agent;
     public Transform swordContainer;
 
+    [SerializeField] private Material possesedTexture;
+    [SerializeField] private Material enemyTexture;
+
+    [SerializeField] private SkinnedMeshRenderer mesh;
+
     public Rigidbody rb;
 
     public CapsuleCollider col;
@@ -53,6 +58,18 @@ public class EnemyController : MonoBehaviour
         get;
 
         private set;
+    }
+
+    public void SwitchMaterial(bool possessed)
+    {
+        if (possessed)
+        {
+            mesh.material = possesedTexture;
+        }
+        else
+        {
+            mesh.material = enemyTexture;
+        }
     }
 
     public void ApplyDamage(float damage)

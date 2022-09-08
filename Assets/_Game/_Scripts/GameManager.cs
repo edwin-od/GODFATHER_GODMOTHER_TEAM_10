@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
         
         //currentPlayer.tag = "Enemy";
         currentPlayer.possessed = false;
+        currentPlayer.SwitchMaterial(false);
         currentPlayer.agent.enabled = true;
         currentPlayer.col.isTrigger = true;
         if (currentPlayer.animator)
@@ -155,6 +156,7 @@ public class GameManager : MonoBehaviour
         currentPlayer.agent.enabled = false;
         currentPlayer.col.isTrigger = false;
         currentPlayer.possessed = true;
+        currentPlayer.SwitchMaterial(true);
         //currentPlayer.tag = "Player";
         
         //aimLine = currentPlayer.GetComponent<LineRenderer>();

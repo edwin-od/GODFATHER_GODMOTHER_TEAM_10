@@ -546,9 +546,13 @@ MonoBehaviour:
   possessed: 0
   agent: {fileID: 4166064567548698107}
   swordContainer: {fileID: 3469913498058655909}
+  possesedTexture: {fileID: 2100000, guid: 6e5a184f3caaba74fadc1f635708a720, type: 2}
+  enemyTexture: {fileID: 2100000, guid: 10ef7e2cbf70ac14a8edfd87b183ae97, type: 2}
+  mesh: {fileID: 8926975929991325839}
   rb: {fileID: 5327309939066559098}
   col: {fileID: 4036218945453174405}
   prediction: {fileID: 4041227239437796756}
+  cooldownAttack: 1
 --- !u!195 &4166064567548698107
 NavMeshAgent:
   m_ObjectHideFlags: 0
