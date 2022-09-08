@@ -1554,7 +1554,7 @@ MonoBehaviour:
   hpContainer: {fileID: 2017609826}
   playerSpawn: {fileID: 415416675}
   playerSpawnType: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-  playerSpeed: 6
+  playerSpeed: 0.3
   stages:
   - enemyWaves:
     - enemies:

@@ -484,6 +484,7 @@ GameObject:
   - component: {fileID: 4166064567548698107}
   - component: {fileID: 5327309939066559098}
   - component: {fileID: 1234946490703454218}
+  - component: {fileID: 849492384823103808}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Untagged
@@ -545,6 +546,8 @@ MonoBehaviour:
   possessed: 0
   agent: {fileID: 4166064567548698107}
   swordContainer: {fileID: 3469913498058655909}
+  rb: {fileID: 5327309939066559098}
+  cont: {fileID: 849492384823103808}
 --- !u!195 &4166064567548698107
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -575,13 +578,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2156297514107106053}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 60
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.6
   m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &1234946490703454218
 CapsuleCollider:
@@ -597,6 +600,24 @@ CapsuleCollider:
   m_Height: 21.1
   m_Direction: 1
   m_Center: {x: 0, y: 9.05, z: 0}
+--- !u!143 &849492384823103808
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156297514107106053}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2359707962563941653
 GameObject:
   m_ObjectHideFlags: 0

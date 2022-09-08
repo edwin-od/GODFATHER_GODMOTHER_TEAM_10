@@ -169,10 +169,25 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (isPlayerTransition)
+        {
+            sword.transform.position += launchDir.normalized * swordSpeed * Time.deltaTime;
+            launchLimit += Time.deltaTime;
+            if (launchLimit >= 2)
+            {
+                LaunchLimit();
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
         if (currentPlayer && !isPlayerTransition)
         {
-            Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized * Time.deltaTime * playerSpeed;
-            
+            Vector3 dir =
+                (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized *
+                Time.deltaTime * playerSpeed;
+
             float mg = dir.sqrMagnitude;
             if (!moving && mg > 0)
             {
@@ -184,7 +199,7 @@ public class GameManager : MonoBehaviour
                 moving = false;
                 OnPlayerStopMoving?.Invoke();
             }
-            
+
             if (Input.GetKeyDown(KeyCode.JoystickButton3))
             {
                 isPlayerTransition = true;
@@ -192,25 +207,16 @@ public class GameManager : MonoBehaviour
                 sword.transform.SetParent(null);
                 launchLimit = 0;
             }
+
             if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.JoystickButton2))
             {
-                Debug.Log("Hey");
                 currentPlayer.Attack();
             }
-            currentPlayer.transform.position += dir;
+            currentPlayer.cont.Move(dir.normalized * playerSpeed);
             currentPlayer.transform.rotation = Quaternion.LookRotation(dir.magnitude == 0 ? currentPlayer.transform.forward : dir.normalized);
         }
-        if (isPlayerTransition)
-        {
-            sword.transform.position += launchDir.normalized * swordSpeed * Time.deltaTime;
-            launchLimit += Time.deltaTime;
-            if (launchLimit >= 2)
-            {
-                LaunchLimit();
-            }
-        }
     }
-    
+
     private void SpawnHPs()
     {
         for (int i = 0; i < hpContainer.childCount; ++i)
