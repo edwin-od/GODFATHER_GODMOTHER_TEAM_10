@@ -16,9 +16,7 @@ public class EnemyController : MonoBehaviour
     [HideInInspector] public bool possessed = false;
 
     public NavMeshAgent agent;
-
-    private bool playerMoving = false;
-
+    
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -33,9 +31,6 @@ public class EnemyController : MonoBehaviour
         currentHealth = enemySO.hp;
 
         GameManager.Instance.AddEnemy(this);
-        
-        GameManager.Instance.OnPlayerStartMoving += PlayerStartedMoving;
-        GameManager.Instance.OnPlayerStopMoving += PlayerStoppedMoving;
     }
 
     public float currentHealth
@@ -71,9 +66,6 @@ public class EnemyController : MonoBehaviour
 
         GameManager.Instance.RemoveEnemy(this);
         
-        GameManager.Instance.OnPlayerStartMoving -= PlayerStartedMoving;
-        GameManager.Instance.OnPlayerStopMoving -= PlayerStoppedMoving;
-        
         Destroy(gameObject);
     }
 
@@ -87,18 +79,7 @@ public class EnemyController : MonoBehaviour
     {
         animator.SetBool("Corrupted", true);
     }
-
-    void PlayerStartedMoving()
-    {
-        if (GameManager.Instance.isPlayerTransition) return;
-
-        playerMoving = true;
-    }
     
-    void PlayerStoppedMoving()
-    {
-        playerMoving = false;
-    }
 
     private float elapsed = 0;
     private float rate = 0.25f;
@@ -106,7 +87,7 @@ public class EnemyController : MonoBehaviour
     {
         if (this == GameManager.Instance.Player) return;
         
-        if (playerMoving)
+        if (true)//GameManager.Instance.moving)
         {
             elapsed += Time.deltaTime;
             if (elapsed > rate)

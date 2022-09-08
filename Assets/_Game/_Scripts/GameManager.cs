@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
 
     public Action OnPlayerStartMoving;
     public Action OnPlayerStopMoving;
-    private bool moving = false;
+    [HideInInspector] public bool moving = false;
 
     private Image[] hps;
 
