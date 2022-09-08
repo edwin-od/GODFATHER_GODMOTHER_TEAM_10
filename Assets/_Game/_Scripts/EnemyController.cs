@@ -69,15 +69,15 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //ATTACK TO DO
     public void Attack()
     {
         animator.SetTrigger("Attack");
     }
 
-    public void Corruption()
+    public void Transition()
     {
-        animator.SetBool("Corrupted", true);
+        animator.SetBool("Corrupted", possessed);
+        animator.SetTrigger("Transition");
     }
     
 
@@ -86,7 +86,8 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         if (this == GameManager.Instance.Player) return;
-        
+        Debug.Log(agent.velocity.magnitude);
+        animator.SetFloat("Speed", agent.velocity.magnitude);
         if (true)//GameManager.Instance.moving)
         {
             elapsed += Time.deltaTime;
