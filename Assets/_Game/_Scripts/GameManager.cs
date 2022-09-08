@@ -185,6 +185,7 @@ public class GameManager : MonoBehaviour
         if (isPlayerTransition)
         {
             sword.transform.position += launchDir.normalized * swordSpeed * Time.deltaTime;
+            sword.transform.rotation *= Quaternion.Euler(-Time.deltaTime * 500, 0, 0);
             launchLimit += Time.deltaTime;
             
             if (launchLimit >= 2)

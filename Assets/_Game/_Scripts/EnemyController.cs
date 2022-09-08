@@ -23,6 +23,9 @@ public class EnemyController : MonoBehaviour
     public CapsuleCollider col;
 
     public Transform prediction;
+
+    bool attacking = false;
+    bool hit = false;
     
     private void Awake()
     {
@@ -100,29 +103,42 @@ public class EnemyController : MonoBehaviour
     }
     
 
-    private float elapsed = 0;
-    private float rate = 0.25f;
+    private float elapsedAgent = 0;
+    private float rateAgent = 0.25f;
+    public float cooldownAttack = 1f;
+    private float elapsedAttack = 0;
     private void Update()
     {
         animator.SetFloat("Speed", rb.velocity.magnitude);
 
         if (this == GameManager.Instance.Player) return;
 
-        if (true)//GameManager.Instance.moving)
+        elapsedAgent += Time.deltaTime;
+        if (elapsedAgent > rateAgent)
         {
-            elapsed += Time.deltaTime;
-            if (elapsed > rate)
+            if (agent.enabled)
             {
-                if (agent.enabled)
-                {
-                    agent.SetDestination(GameManager.Instance.Player.transform.position);
-                }
-                elapsed = 0;
+                agent.SetDestination(GameManager.Instance.Player.transform.position);
             }
-            
+            elapsedAgent = 0;
+        }
+
+        if (elapsedAttack > 0)
+            elapsedAttack -= Time.deltaTime;
+
+        if (elapsedAttack <= 0)
+        {
             if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= 2)
             {
-                Attack();
+                if (!attacking)
+                {
+                    Attack();
+                }
+                else if (!hit)
+                {
+                    GameManager.Instance.Player.ApplyDamage(enemySO.dmg);
+                    hit = true;
+                }
             }
         }
     }
@@ -135,5 +151,18 @@ public class EnemyController : MonoBehaviour
     public void CorruptionEnd()
     {
         GameManager.Instance.isPlayerCorrupted = false;
+    }
+
+    public void AttackStart()
+    {
+        attacking = true;
+        hit = false;
+    }
+
+    public void AttackEnd()
+    {
+        attacking = false;
+        hit = false;
+        elapsedAttack = cooldownAttack;
     }
 }
