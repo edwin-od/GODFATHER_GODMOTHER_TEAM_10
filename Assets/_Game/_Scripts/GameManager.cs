@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 30;
     }
 
-    [SerializeField] EnemyController currentPlayer;
+    EnemyController currentPlayer;
     public EnemyController Player => currentPlayer;
     HashSet<EnemyController> currentEnemies = new HashSet<EnemyController>();
     public void AddEnemy(EnemyController e)
@@ -146,10 +146,11 @@ public class GameManager : MonoBehaviour
         currentPlayer.agent.enabled = false;
         currentPlayer.possessed = true;
         currentPlayer.tag = "Player";
+
+        sword.transform.SetParent(currentPlayer.swordContainer);
+        sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
+        sword.transform.localEulerAngles = new Vector3(7.469854f, 168.0391f, 164.1708f);
         
-        sword.transform.SetParent(currentPlayer.transform);
-        sword.transform.localPosition = new Vector3(0, 0.4f, 0.6f);
-        sword.transform.localEulerAngles = new Vector3(90, 0, 0);
         if (currentPlayer.GetComponent<Animator>())
         {
             currentPlayer.GetComponent<Animator>()?.SetTrigger("Corruption");
@@ -160,9 +161,9 @@ public class GameManager : MonoBehaviour
     void LaunchLimit()
     {
         isPlayerTransition = false;
-        sword.transform.SetParent(currentPlayer.transform);
-        sword.transform.localPosition = new Vector3(0, 0.4f, 0.6f);
-        sword.transform.localEulerAngles = new Vector3(90, 0, 0);
+        sword.transform.SetParent(currentPlayer.swordContainer);
+        sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
+        sword.transform.localEulerAngles = new Vector3(7.469854f, 168.0391f, 164.1708f);
         currentPlayer.tag = "Player";
     }
 

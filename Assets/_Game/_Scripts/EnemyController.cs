@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     [HideInInspector] public bool possessed = false;
 
     public NavMeshAgent agent;
+    public Transform swordContainer;
     
     private void Start()
     {
