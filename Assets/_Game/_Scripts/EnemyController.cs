@@ -82,6 +82,7 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
+
     public void StopAttack()
     {
         GameManager.Instance.StopSwing();

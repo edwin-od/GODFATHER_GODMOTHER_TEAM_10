@@ -10,13 +10,8 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Debug.Log("There is more than one AudioManager in the scene");
-            Destroy(gameObject);
-        }
-        instance = this;
         InitializeAllClips();
+        PlayClip("Introduction");
     }
 
     public void PauseOrUnpauseAllClips(bool that)
@@ -43,6 +38,7 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.volume = s.volume;
             s.source.loop = s.loop;
+            s.source.playOnAwake = false;
         }
     }
 
@@ -60,5 +56,12 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+    private void Update()
+    {
+        if (!allSounds[0].source.isPlaying && !allSounds[1].source.isPlaying)
+        {
+            PlayClip("Loop");
+        }
     }
 }
