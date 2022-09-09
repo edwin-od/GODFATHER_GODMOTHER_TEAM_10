@@ -99,7 +99,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            audioManager.PlayClip("SecondStephero");
+            audioManager.PlayClip("SecondStepHero");
         }
     }
 
@@ -119,7 +119,7 @@ public class EnemyController : MonoBehaviour
     public void Die()
     {
         dead = true;
-
+        audioManager.PlayClip(possessed ? "DeathHero" : "DeathEnemy");
         animator.SetTrigger("Death");
 
         GameManager.Instance.RemoveEnemy(this);
@@ -145,6 +145,10 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
+    public void SoundSword()
+    {
+        audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
+    }
 
     public void StopAttack()
     {

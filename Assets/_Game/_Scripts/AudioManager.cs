@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            s.source.pitch = UnityEngine.Random.Range(s.pitch - 0.1f, s.pitch + 0.1f);
+            s.source.pitch = s.pitch;
             s.source.volume = s.volume;
             s.source.loop = s.loop;
             s.source.playOnAwake = false;
@@ -56,6 +56,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("The clip " + name + " doesn't exist !");
             return;
         }
+        s.source.pitch = UnityEngine.Random.Range(s.pitch - 0.1f, s.pitch + 0.1f);
         s.source.Play();
     }
     private void Update()

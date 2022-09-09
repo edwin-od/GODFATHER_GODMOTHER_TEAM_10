@@ -44427,6 +44427,8 @@ MonoBehaviour:
   sword: {fileID: 542963977791110765}
   swordSpeed: 20
   launchDir: {x: 0, y: 0, z: 0}
+  forceThrowTimer: 10
+  forceThrowSlider: {fileID: 0}
 --- !u!4 &2045990889
 Transform:
   m_ObjectHideFlags: 0
@@ -44492,26 +44494,44 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: FirstStep
-    clip: {fileID: 8300000, guid: 370b45eb8e841664fa3047de11bd32e0, type: 3}
-    volume: 0.134
+    clip: {fileID: 8300000, guid: 97a1411362bb7b04cba2035a7584680e, type: 3}
+    volume: 0.036
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: FirstStepHero
-    clip: {fileID: 8300000, guid: 370b45eb8e841664fa3047de11bd32e0, type: 3}
+    clip: {fileID: 8300000, guid: 97a1411362bb7b04cba2035a7584680e, type: 3}
     volume: 0.282
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: SecondStep
-    clip: {fileID: 8300000, guid: 0140487db8a789343b2e5126b271b95a, type: 3}
-    volume: 0.173
+    clip: {fileID: 8300000, guid: 5c516bed59d1ecb469938e45e2bd252e, type: 3}
+    volume: 0.03
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: SecondStepHero
-    clip: {fileID: 8300000, guid: 0140487db8a789343b2e5126b271b95a, type: 3}
+    clip: {fileID: 8300000, guid: 5c516bed59d1ecb469938e45e2bd252e, type: 3}
     volume: 0.299
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DeathHero
+    clip: {fileID: 8300000, guid: 45c556ff978674e4a9c5f13e3ff8ae5f, type: 3}
+    volume: 0.348
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordSwing
+    clip: {fileID: 8300000, guid: 7a5b5317c32624f469c50d5080ac8870, type: 3}
+    volume: 1
+    pitch: 1.5
+    loop: 0
+    source: {fileID: 0}
+  - name: DeathEnemy
+    clip: {fileID: 8300000, guid: 23058bf541c1e3841bf13e631dbd136b, type: 3}
+    volume: 0.167
     pitch: 1
     loop: 0
     source: {fileID: 0}
