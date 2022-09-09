@@ -70,13 +70,19 @@ public class GameManager : MonoBehaviour
             currentEnemies.Add(e);
     }
 
+
+    public CanvasAnim _AnimInstance;
+    
     public void RemoveEnemy(EnemyController e)
     {
         if (e == currentPlayer)
         {
-            // LOSE
+           _AnimInstance.End();
             StopEverything();
-
+            if (Input.GetKeyDown(KeyCode.JoystickButton0))
+            {
+                _AnimInstance.Restart();
+            }
         }
 
         currentEnemies.Remove(e);
@@ -322,6 +328,7 @@ public class GameManager : MonoBehaviour
 
     public void StopSwing()
     {
+
         swordBehaviour.swinging = false;
     }
 
