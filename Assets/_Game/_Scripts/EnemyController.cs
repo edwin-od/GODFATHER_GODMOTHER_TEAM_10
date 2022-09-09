@@ -155,7 +155,8 @@ public class EnemyController : MonoBehaviour
 
     public void SoundSword()
     {
-        audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
+        if (possessed) audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
+        else audioManager.PlayClip("SwordSwing");
     }
 
     public void StopAttack()
@@ -263,7 +264,5 @@ public class EnemyController : MonoBehaviour
         attacking = false;
         hit = false;
         elapsedAttack = cooldownAttack;
-    }
-    
-    
+    } 
 }
