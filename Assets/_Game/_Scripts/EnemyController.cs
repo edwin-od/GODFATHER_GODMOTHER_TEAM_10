@@ -154,7 +154,7 @@ public class EnemyController : MonoBehaviour
     public void NoMoreHurt()
     {
         hurted = false;
-        GameManager.Instance.ResumeChase(this);
+        if (!possessed) GameManager.Instance.ResumeChase(this);
     }
 
     public void scoreUpgrade(int score)
