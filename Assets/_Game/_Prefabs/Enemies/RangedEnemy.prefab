@@ -555,6 +555,8 @@ MonoBehaviour:
   rb: {fileID: 5327309939066559098}
   col: {fileID: 4036218945453174405}
   prediction: {fileID: 4041227239437796756}
+  hitInvincibilityCountdown: 1
+  pause: 0
   attackDistance: 3
   cooldownAttack: 1
 --- !u!195 &4166064567548698107

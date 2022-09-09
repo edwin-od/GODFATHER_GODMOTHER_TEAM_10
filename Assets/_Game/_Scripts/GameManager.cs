@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         public EnemySpawn[] enemies;
     }
-   
+    
     private static GameManager _instance;
     public static GameManager Instance => _instance;
     void Awake()
@@ -148,6 +148,7 @@ public class GameManager : MonoBehaviour
         foreach (var e in currentEnemies)
         {
             e.animator.speed = 0;
+            e.pause = true;
         }
     }
     
@@ -156,6 +157,7 @@ public class GameManager : MonoBehaviour
         foreach (var e in currentEnemies)
         {
             e.animator.speed = 1;
+            e.pause = false;
         }
         pause = false;
         SpawnManager.Instance.pause = false;
