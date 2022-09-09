@@ -108,7 +108,7 @@ Animator:
   m_GameObject: {fileID: 207839590328852007}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bb032483eb65056498c4f8d140196903, type: 2}
+  m_Controller: {fileID: 9100000, guid: d1132c9228d92184b99ffb6ebdaa58b5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -509,7 +509,7 @@ Transform:
   - {fileID: 4041227239437796756}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: -174.99997, z: 0}
 --- !u!95 &2171546300381847984
 Animator:
   serializedVersion: 4
