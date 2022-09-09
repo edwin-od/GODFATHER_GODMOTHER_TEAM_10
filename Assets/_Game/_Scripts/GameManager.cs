@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
             e.gameObject.SetActive(false);
         }
         currentPlayer.gameObject.SetActive(false);
+        PauseGame();
     }
 
     public void PauseChase()
@@ -230,6 +231,8 @@ public class GameManager : MonoBehaviour
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
         sword.transform.localEulerAngles = new Vector3(7.469854f, 168.0391f, 164.1708f);
+
+        currentPlayer.Die();
     }
 
     void TogglePause()
