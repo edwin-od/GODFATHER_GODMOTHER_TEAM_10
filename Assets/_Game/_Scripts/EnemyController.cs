@@ -26,6 +26,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private ParticleSystem corruptionParticle;
     [SerializeField] private ParticleSystem bloodParticle;
 
+    private AudioManager audioManager;
+
     public Rigidbody rb;
 
     public CapsuleCollider col;
@@ -46,6 +48,7 @@ public class EnemyController : MonoBehaviour
         prediction.gameObject.SetActive(false);
 
         Init(enemySO);
+        audioManager = GameManager.Instance.audioManager;
     }
 
     public void Init(EnemySO enemySO)
@@ -73,6 +76,30 @@ public class EnemyController : MonoBehaviour
         else
         {
             mesh.material = enemyTexture;
+        }
+    }
+
+    public void FirstStep()
+    {
+        if (!possessed)
+        {
+            audioManager.PlayClip("FirstStep");
+        }
+        else
+        {
+            audioManager.PlayClip("FirstStepHero");
+        }
+    }
+    
+    public void SecondStep()
+    {
+        if (!possessed)
+        {
+            audioManager.PlayClip("SecondStep");
+        }
+        else
+        {
+            audioManager.PlayClip("SecondStephero");
         }
     }
 

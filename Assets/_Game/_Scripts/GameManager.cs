@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
     public EnemySpawn[] CurrentEnemySpawnInfo => stages[currentStage].enemyWaves[currentEnemyWave].enemies;
     public Transform[] CurrentEnemySpawnsPoints => stages[currentStage].spawnPoints;
 
-    [SerializeField] private AudioManager audioManager;
+    public AudioManager audioManager;
 
     public Action OnNewEnemyWave;
     public Action OnNewStage;
