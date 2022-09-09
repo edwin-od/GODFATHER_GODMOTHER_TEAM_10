@@ -308,6 +308,7 @@ public class GameManager : MonoBehaviour
                     if (!cancelThrow)
                     {
                         forceThrowCountdown = forceThrowTimer;
+                        firstForce = false;
                         
                         currentPlayer.SwitchMaterial(false);
                         audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
@@ -334,6 +335,11 @@ public class GameManager : MonoBehaviour
             }
             
             forceThrowCountdown -= Time.deltaTime;
+
+            if (forceThrowSlider)
+            {
+                forceThrowSlider.value = forceThrowCountdown / (firstForce ? 2 * forceThrowTimer : forceThrowTimer);
+            }
             
             if (forceThrowCountdown < 0)
             {
