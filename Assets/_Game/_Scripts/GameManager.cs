@@ -196,6 +196,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float forceThrowTimer = 10;
     private float forceThrowCountdown;
+    [SerializeField] private Slider forceThrowSlider;
     
     private void Start()
     {
@@ -265,6 +266,7 @@ public class GameManager : MonoBehaviour
         else PauseGame();
     }
 
+    private bool firstForce = true;
     private bool cancelThrow = false;
     private void Update()
     {
@@ -332,6 +334,7 @@ public class GameManager : MonoBehaviour
             }
             
             forceThrowCountdown -= Time.deltaTime;
+            
             if (forceThrowCountdown < 0)
             {
                 currentPlayer.Die();
