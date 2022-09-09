@@ -187,10 +187,6 @@ public class GameManager : MonoBehaviour
     int currentEnemyWave = 0;
 
     private Image[] hps;
-
-    [SerializeField] private float forceThrowTimer = 10;
-    private float forceThrowCountdown;
-    [SerializeField] private Slider forceThrowSlider;
     
     private void Start()
     {
@@ -200,8 +196,6 @@ public class GameManager : MonoBehaviour
     
     void StartGame()
     {
-        forceThrowCountdown = 2 * forceThrowTimer;
-        
         currentPlayer = Instantiate(playerSpawnType.prefab, playerSpawn).GetComponent<EnemyController>();
         currentPlayer.transform.SetParent(null);
         currentPlayer.transform.position = playerSpawn.position;
@@ -245,13 +239,15 @@ public class GameManager : MonoBehaviour
 
     public void LaunchLimit()
     {
+        currentPlayer.SwitchMaterial(true);
+        
         swordBehaviour.SetColliderRadius(true);
         isPlayerTransition = false;
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
         sword.transform.localEulerAngles = new Vector3(7.469854f, 168.0391f, 164.1708f);
 
-        currentPlayer.Die();
+        currentPlayer.ApplyDamage(0.5f, true);
     }
 
     void TogglePause()
@@ -315,7 +311,6 @@ public class GameManager : MonoBehaviour
                 {
                     if (!cancelThrow)
                     {
-                        forceThrowCountdown = forceThrowTimer;
                         firstForce = false;
                         
                         currentPlayer.SwitchMaterial(false);
@@ -340,18 +335,6 @@ public class GameManager : MonoBehaviour
                     currentPlayer.Attack();
                     swordBehaviour.swinging = true;
                 }
-            }
-            
-            forceThrowCountdown -= Time.deltaTime;
-
-            if (forceThrowSlider)
-            {
-                forceThrowSlider.value = forceThrowCountdown / (firstForce ? 2 * forceThrowTimer : forceThrowTimer);
-            }
-            
-            if (forceThrowCountdown < 0)
-            {
-                currentPlayer.Die();
             }
         }
     }
