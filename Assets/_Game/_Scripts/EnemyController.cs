@@ -105,11 +105,11 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void ApplyDamage(float damage)
+    public void ApplyDamage(float damage, bool forceApply = false)
     {
         if (this == GameManager.Instance.Player)
         {
-            if (isInv) return;
+            if (isInv && !forceApply) return;
             isInv = true;
         }
         else
