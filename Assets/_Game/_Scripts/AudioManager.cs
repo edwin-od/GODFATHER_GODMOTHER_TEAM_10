@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     {
         InitializeAllClips();
         PlayClip("Introduction");
+        PlayClip("Rain");
     }
 
     public void PauseOrUnpauseAllClips(bool that)

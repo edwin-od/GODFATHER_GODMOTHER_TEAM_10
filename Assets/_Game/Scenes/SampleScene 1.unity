@@ -5090,7 +5090,7 @@ Transform:
   m_Children:
   - {fileID: 309507382}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: -23.704, y: 175.317, z: -0.493}
 --- !u!1 &235150258
 GameObject:
@@ -8701,7 +8701,7 @@ Transform:
   m_Children:
   - {fileID: 868403593}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &415416674
 GameObject:
@@ -43182,6 +43182,12 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Loop
+    clip: {fileID: 8300000, guid: f68d9f6425a76da4895b07d5dfde3c19, type: 3}
+    volume: 0.112
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Rain
     clip: {fileID: 8300000, guid: f68d9f6425a76da4895b07d5dfde3c19, type: 3}
     volume: 0.112
     pitch: 1
