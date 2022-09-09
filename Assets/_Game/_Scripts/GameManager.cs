@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour
         SpawnHPs();
     }
 
-    void LaunchLimit()
+    public void LaunchLimit()
     {
         isPlayerTransition = false;
         sword.transform.SetParent(currentPlayer.swordContainer);
