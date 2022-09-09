@@ -39,6 +39,7 @@ public class EnemyController : MonoBehaviour
     bool attacking = false;
     bool hit = false;
     bool dead = false;
+    float timerStuck;
     
     private void Awake()
     {
@@ -46,7 +47,7 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         col = GetComponent<CapsuleCollider>();
         col.isTrigger = true;
-
+        timerStuck = 0f;
         prediction.gameObject.SetActive(false);
 
         Init(enemySO);
@@ -112,7 +113,10 @@ public class EnemyController : MonoBehaviour
             if (isInv && !forceApply) return;
             isInv = true;
         }
-        
+        else
+        {
+            timerStuck = 0.5f;
+        }
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, enemySO.hp);
         bloodParticle.Play();
         if (possessed)
@@ -155,7 +159,8 @@ public class EnemyController : MonoBehaviour
 
     public void SoundSword()
     {
-        audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
+        if (possessed) audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
+        else audioManager.PlayClip("SwordSwing");
     }
 
     public void StopAttack()
@@ -191,6 +196,11 @@ public class EnemyController : MonoBehaviour
     {
         animator.SetFloat("Speed", !agent.enabled && GameManager.Instance.Player != this ? 0 : rb.velocity.magnitude);
 
+        if (timerStuck > 0)
+        {
+            timerStuck -= Time.deltaTime;
+        }
+
         if (!pause)
         {
             if (this == GameManager.Instance.Player)
@@ -224,7 +234,7 @@ public class EnemyController : MonoBehaviour
             {
                 if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= attackDistance)
                 {
-                    if (!attacking)
+                    if (!attacking && timerStuck <=0)
                     {
                         Attack();
                     }
@@ -263,7 +273,5 @@ public class EnemyController : MonoBehaviour
         attacking = false;
         hit = false;
         elapsedAttack = cooldownAttack;
-    }
-    
-    
+    } 
 }
