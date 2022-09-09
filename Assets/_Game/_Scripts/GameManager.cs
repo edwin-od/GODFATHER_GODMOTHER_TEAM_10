@@ -11,10 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private KeyCode attackJoystick = KeyCode.JoystickButton2;
     [SerializeField] private KeyCode throwJoystick = KeyCode.JoystickButton3;
     
-    [SerializeField] Sprite fullHeart;
-    [SerializeField] Sprite halfHeart;
-    [SerializeField] Sprite emptyHeart;
-    [SerializeField] RectTransform hpContainer;
+    // [SerializeField] Sprite fullHeart;
+    // [SerializeField] Sprite halfHeart;
+    // [SerializeField] Sprite emptyHeart;
+    //[SerializeField] RectTransform hpContainer;
+    [SerializeField] public Slider healthBar;
 
     [SerializeField] Transform playerSpawn;
     [SerializeField] EnemySO playerSpawnType;
@@ -368,52 +369,54 @@ public class GameManager : MonoBehaviour
 
     private void SpawnHPs()
     {
-        hpContainer.sizeDelta = new Vector2(heartUIDimension * currentPlayer.EnemySO.hp, heartUIDimension);
-
-        for (int i = 0; i < hpContainer.childCount; ++i)
-        {
-            Destroy(hpContainer.GetChild(i).gameObject);
-        }
-
-        hps = new Image[currentPlayer.EnemySO.hp];
-		
-        for (int i = 0; i < currentPlayer.EnemySO.hp; ++i)
-        {
-            GameObject NewObj = new GameObject();
-            Image NewImage = NewObj.AddComponent<Image>();
-            NewImage.sprite = fullHeart;
-            NewImage.rectTransform.SetParent(hpContainer);
-            NewObj.SetActive(true);
-            hps[i] = NewImage;
-        }
-
         UpdateHealthUI();
+    //     hpContainer.sizeDelta = new Vector2(heartUIDimension * currentPlayer.EnemySO.hp, heartUIDimension);
+    //
+    //     for (int i = 0; i < hpContainer.childCount; ++i)
+    //     {
+    //         Destroy(hpContainer.GetChild(i).gameObject);
+    //     }
+    //
+    //     hps = new Image[currentPlayer.EnemySO.hp];
+		  //
+    //     for (int i = 0; i < currentPlayer.EnemySO.hp; ++i)
+    //     {
+    //         GameObject NewObj = new GameObject();
+    //         Image NewImage = NewObj.AddComponent<Image>();
+    //         NewImage.sprite = fullHeart;
+    //         NewImage.rectTransform.SetParent(hpContainer);
+    //         NewObj.SetActive(true);
+    //         hps[i] = NewImage;
+    //     }
+    //
+    //     UpdateHealthUI();
     }
     
     public void UpdateHealthUI()
     {
-        if (hpContainer.childCount < currentPlayer.EnemySO.hp)
-            SpawnHPs();
-        
-        bool isHalf = currentPlayer.currentHealth - Mathf.Floor(currentPlayer.currentHealth) > 0;
-		
-        int i = 0;
-		
-        for(; i < currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
-        {
-            hps[i].sprite = fullHeart;
-        }
-
-        if (isHalf)
-        {
-            hps[i].sprite = halfHeart;
-            ++i;
-        }
-        
-        for(; i - currentPlayer.currentHealth - (isHalf ? 1 : 0) < currentPlayer.EnemySO.hp - currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
-        {
-            hps[i].sprite = emptyHeart;
-        }
+        healthBar.value = currentPlayer.currentHealth / currentPlayer.enemySO.hp;
+        // if (hpContainer.childCount < currentPlayer.EnemySO.hp)
+        //     SpawnHPs();
+        //
+        // bool isHalf = currentPlayer.currentHealth - Mathf.Floor(currentPlayer.currentHealth) > 0;
+        //
+        // int i = 0;
+        //
+        // for(; i < currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
+        // {
+        //     hps[i].sprite = fullHeart;
+        // }
+        //
+        // if (isHalf)
+        // {
+        //     hps[i].sprite = halfHeart;
+        //     ++i;
+        // }
+        //
+        // for(; i - currentPlayer.currentHealth - (isHalf ? 1 : 0) < currentPlayer.EnemySO.hp - currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
+        // {
+        //     hps[i].sprite = emptyHeart;
+        // }
     }
 
     private void Retry()
