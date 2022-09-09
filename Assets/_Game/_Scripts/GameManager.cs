@@ -194,7 +194,9 @@ public class GameManager : MonoBehaviour
 
     private Image[] hps;
 
-
+    [SerializeField] private float forceThrowTimer = 10;
+    private float forceThrowCountdown;
+    
     private void Start()
     {
         swordBehaviour = sword.GetComponent<SwordBehaviour>();
@@ -203,6 +205,8 @@ public class GameManager : MonoBehaviour
     
     void StartGame()
     {
+        forceThrowCountdown = 2 * forceThrowTimer;
+        
         currentPlayer = Instantiate(playerSpawnType.prefab, playerSpawn).GetComponent<EnemyController>();
         currentPlayer.transform.SetParent(null);
         currentPlayer.transform.position = playerSpawn.position;
@@ -301,6 +305,8 @@ public class GameManager : MonoBehaviour
                 {
                     if (!cancelThrow)
                     {
+                        forceThrowCountdown = forceThrowTimer;
+                        
                         currentPlayer.SwitchMaterial(false);
                         audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
                         swordBehaviour.SetColliderRadius(false);
@@ -323,6 +329,12 @@ public class GameManager : MonoBehaviour
                     currentPlayer.Attack();
                     swordBehaviour.swinging = true;
                 }
+            }
+            
+            forceThrowCountdown -= Time.deltaTime;
+            if (forceThrowCountdown < 0)
+            {
+                currentPlayer.Die();
             }
         }
     }
