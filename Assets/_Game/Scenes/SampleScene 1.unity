@@ -43940,6 +43940,7 @@ MonoBehaviour:
   predictionLayers:
     serializedVersion: 2
     m_Bits: 192
+  audioManager: {fileID: 0}
   isPlayerTransition: 0
   isPlayerCorrupted: 0
   sword: {fileID: 542963977791110765}
@@ -43982,6 +43983,30 @@ MonoBehaviour:
   - name: Loop
     clip: {fileID: 8300000, guid: f68d9f6425a76da4895b07d5dfde3c19, type: 3}
     volume: 0.112
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Rain
+    clip: {fileID: 8300000, guid: 37237eaa90504e448a357f4b5c7bf2a4, type: 3}
+    volume: 0.151
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sword1
+    clip: {fileID: 8300000, guid: 0f67858a6f6207d4792474c0c19fafbb, type: 3}
+    volume: 0.255
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sword2
+    clip: {fileID: 8300000, guid: 77532e0a0d5a00d4c935b960259b02bc, type: 3}
+    volume: 0.282
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sword3
+    clip: {fileID: 8300000, guid: 30ef0a6912072da45867d23485e98c07, type: 3}
+    volume: 0.277
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -47580,6 +47605,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   swinging: 0
+  col: {fileID: 0}
+  attackColSize: 1
+  throwColSize: 1
 --- !u!23 &4539702727749372498
 MeshRenderer:
   m_ObjectHideFlags: 0

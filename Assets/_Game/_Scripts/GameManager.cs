@@ -159,6 +159,8 @@ public class GameManager : MonoBehaviour
     public EnemySpawn[] CurrentEnemySpawnInfo => stages[currentStage].enemyWaves[currentEnemyWave].enemies;
     public Transform[] CurrentEnemySpawnsPoints => stages[currentStage].spawnPoints;
 
+    [SerializeField] private AudioManager audioManager;
+
     public Action OnNewEnemyWave;
     public Action OnNewStage;
 
@@ -277,6 +279,7 @@ public class GameManager : MonoBehaviour
 
                 if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse1))
                 {
+
                     swordBehaviour.SetColliderRadius(false);
                     currentPlayer.animator.SetTrigger("Attack");
                     isPlayerTransition = true;
