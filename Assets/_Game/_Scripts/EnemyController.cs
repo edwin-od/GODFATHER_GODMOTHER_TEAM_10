@@ -34,6 +34,8 @@ public class EnemyController : MonoBehaviour
 
     public Transform prediction;
 
+    public float hitInvincibilityCountdown = 0.2f;
+
     bool attacking = false;
     bool hit = false;
     bool dead = false;
@@ -105,6 +107,12 @@ public class EnemyController : MonoBehaviour
 
     public void ApplyDamage(float damage)
     {
+        if (this == GameManager.Instance.Player)
+        {
+            if (isInv) return;
+            isInv = true;
+        }
+        
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, enemySO.hp);
         bloodParticle.Play();
         if (possessed)
@@ -171,6 +179,9 @@ public class EnemyController : MonoBehaviour
         corruptionParticle.Stop();
     }
 
+    [HideInInspector] public bool pause = false;
+    private bool isInv = false;
+    private float elapsedInv = 0;
     public float attackDistance = 3;
     private float elapsedAgent = 0;
     private float rateAgent = 0.25f;
@@ -180,33 +191,48 @@ public class EnemyController : MonoBehaviour
     {
         animator.SetFloat("Speed", !agent.enabled && GameManager.Instance.Player != this ? 0 : rb.velocity.magnitude);
 
-        if (this == GameManager.Instance.Player) return;
-
-        elapsedAgent += Time.deltaTime;
-        if (elapsedAgent > rateAgent)
+        if (!pause)
         {
-            if (agent.enabled)
+            if (this == GameManager.Instance.Player)
             {
-                agent.SetDestination(GameManager.Instance.Player.transform.position);
-            }
-            elapsedAgent = 0;
-        }
-
-        if (elapsedAttack > 0)
-            elapsedAttack -= Time.deltaTime;
-
-        if (!dead && elapsedAttack <= 0)
-        {
-            if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= attackDistance)
-            {
-                if (!attacking)
+                if (isInv)
                 {
-                    Attack();
+                    elapsedInv += Time.deltaTime;
+                    if (elapsedInv > hitInvincibilityCountdown)
+                    {
+                        isInv = false;
+                        elapsedInv = 0;
+                    }
                 }
-                else if (!hit)
+                return;
+            }
+            
+            elapsedAgent += Time.deltaTime;
+            if (elapsedAgent > rateAgent)
+            {
+                if (agent.enabled)
                 {
-                    GameManager.Instance.Player.ApplyDamage(enemySO.dmg);
-                    hit = true;
+                    agent.SetDestination(GameManager.Instance.Player.transform.position);
+                }
+                elapsedAgent = 0;
+            }
+
+            if (elapsedAttack > 0)
+                elapsedAttack -= Time.deltaTime;
+
+            if (!dead && elapsedAttack <= 0)
+            {
+                if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= attackDistance)
+                {
+                    if (!attacking)
+                    {
+                        Attack();
+                    }
+                    else if (!hit)
+                    {
+                        GameManager.Instance.Player.ApplyDamage(enemySO.dmg);
+                        hit = true;
+                    }
                 }
             }
         }
@@ -238,4 +264,6 @@ public class EnemyController : MonoBehaviour
         hit = false;
         elapsedAttack = cooldownAttack;
     }
+    
+    
 }
