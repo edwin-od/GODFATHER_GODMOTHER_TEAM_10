@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -82,7 +83,13 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.JoystickButton0))
             {
                 _AnimInstance.Restart();
+                Retry();
             }
+            else if (Input.GetKeyDown(KeyCode.Joystick1Button3))
+            {
+                Exit();
+            }
+            
         }
 
         currentEnemies.Remove(e);
@@ -380,5 +387,15 @@ public class GameManager : MonoBehaviour
         {
             hps[i].sprite = emptyHeart;
         }
+    }
+
+    private void Retry()
+    {
+        SceneManager.LoadScene("SampleScene 1");
+    }
+
+    private void Exit()
+    {
+        Application.Quit();
     }
 }
