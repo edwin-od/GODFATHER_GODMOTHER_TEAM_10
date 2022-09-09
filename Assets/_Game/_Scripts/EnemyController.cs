@@ -145,6 +145,7 @@ public class EnemyController : MonoBehaviour
 
         if (this != GameManager.Instance.Player)
         {
+            scoreUpgrade(200);
             rb.useGravity = false;
             StartCoroutine(Death());
         }
@@ -154,6 +155,12 @@ public class EnemyController : MonoBehaviour
     {
         hurted = false;
         GameManager.Instance.ResumeChase(this);
+    }
+
+    public void scoreUpgrade(int score)
+    {
+        GameManager.Instance.score += 1;
+        GameManager.Instance.updateScore();
     }
 
     IEnumerator Death()

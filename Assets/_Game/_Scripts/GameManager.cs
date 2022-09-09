@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Stage[] stages;
 
     [SerializeField] LayerMask predictionLayers;
-
+    
     [System.Serializable]
     public class EnemySpawn
     {
@@ -78,6 +79,8 @@ public class GameManager : MonoBehaviour
 
     public CanvasAnim _AnimInstance;
     private bool endGame = false;
+    public Image gameOver;
+    
     
     public void RemoveEnemy(EnemyController e)
     {
@@ -215,9 +218,17 @@ public class GameManager : MonoBehaviour
         currentPlayer.transform.SetParent(null);
         currentPlayer.transform.position = playerSpawn.position;
         ChangePlayer(currentPlayer);
+        score = 0;
         
         OnNewStage?.Invoke();
         OnNewEnemyWave?.Invoke();
+    }
+
+    public int score
+    {
+        get;
+
+        set;
     }
 
     public void ChangePlayer(EnemyController newPlayer)
@@ -384,58 +395,22 @@ public class GameManager : MonoBehaviour
     private void SpawnHPs()
     {
         UpdateHealthUI();
-    //     hpContainer.sizeDelta = new Vector2(heartUIDimension * currentPlayer.EnemySO.hp, heartUIDimension);
-    //
-    //     for (int i = 0; i < hpContainer.childCount; ++i)
-    //     {
-    //         Destroy(hpContainer.GetChild(i).gameObject);
-    //     }
-    //
-    //     hps = new Image[currentPlayer.EnemySO.hp];
-		  //
-    //     for (int i = 0; i < currentPlayer.EnemySO.hp; ++i)
-    //     {
-    //         GameObject NewObj = new GameObject();
-    //         Image NewImage = NewObj.AddComponent<Image>();
-    //         NewImage.sprite = fullHeart;
-    //         NewImage.rectTransform.SetParent(hpContainer);
-    //         NewObj.SetActive(true);
-    //         hps[i] = NewImage;
-    //     }
-    //
-    //     UpdateHealthUI();
     }
     
     public void UpdateHealthUI()
     {
         healthBar.value = currentPlayer.currentHealth / currentPlayer.enemySO.hp;
-        // if (hpContainer.childCount < currentPlayer.EnemySO.hp)
-        //     SpawnHPs();
-        //
-        // bool isHalf = currentPlayer.currentHealth - Mathf.Floor(currentPlayer.currentHealth) > 0;
-        //
-        // int i = 0;
-        //
-        // for(; i < currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
-        // {
-        //     hps[i].sprite = fullHeart;
-        // }
-        //
-        // if (isHalf)
-        // {
-        //     hps[i].sprite = halfHeart;
-        //     ++i;
-        // }
-        //
-        // for(; i - currentPlayer.currentHealth - (isHalf ? 1 : 0) < currentPlayer.EnemySO.hp - currentPlayer.currentHealth - (isHalf ? 1 : 0); ++i)
-        // {
-        //     hps[i].sprite = emptyHeart;
-        // }
+    }
+
+    public TMP_Text scoreText;
+    public void updateScore()
+    {
+        scoreText.text = score.ToString();
     }
 
     private void Retry()
     {
-        SceneManager.LoadScene("SampleScene 1");
+        SceneManager.LoadScene("Menu");
     }
 
     private void Exit()
