@@ -5090,7 +5090,7 @@ Transform:
   m_Children:
   - {fileID: 309507382}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: -23.704, y: 175.317, z: -0.493}
 --- !u!1 &235150258
 GameObject:
@@ -7770,7 +7770,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7de62dc2bd3f09745859a552bb897c49, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7de62dc2bd3f09745859a552bb897c49, type: 3}
       propertyPath: m_LocalScale.x
@@ -8701,7 +8701,7 @@ Transform:
   m_Children:
   - {fileID: 868403593}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &415416674
 GameObject:
@@ -13275,7 +13275,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7de62dc2bd3f09745859a552bb897c49, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7de62dc2bd3f09745859a552bb897c49, type: 3}
       propertyPath: m_LocalScale.x
@@ -40972,7 +40972,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7de62dc2bd3f09745859a552bb897c49, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7de62dc2bd3f09745859a552bb897c49, type: 3}
       propertyPath: m_LocalScale.x
@@ -46784,6 +46784,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   swinging: 0
+  col: {fileID: 4282067712616508276}
+  attackColSize: 0.01
+  throwColSize: 0.08
 --- !u!23 &4539702727749372498
 MeshRenderer:
   m_ObjectHideFlags: 0

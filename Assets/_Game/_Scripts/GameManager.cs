@@ -196,6 +196,8 @@ public class GameManager : MonoBehaviour
 
     public void ChangePlayer(EnemyController newPlayer)
     {
+        swordBehaviour.SetColliderRadius(true);
+        
         isPlayerTransition = false;
         
         currentPlayer.possessed = false;
@@ -227,6 +229,7 @@ public class GameManager : MonoBehaviour
 
     public void LaunchLimit()
     {
+        swordBehaviour.SetColliderRadius(true);
         isPlayerTransition = false;
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
@@ -274,6 +277,7 @@ public class GameManager : MonoBehaviour
 
                 if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse1))
                 {
+                    swordBehaviour.SetColliderRadius(false);
                     currentPlayer.animator.SetTrigger("Attack");
                     isPlayerTransition = true;
                     launchDir = currentPlayer.transform.forward;
