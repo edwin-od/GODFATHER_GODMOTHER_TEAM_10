@@ -5,52 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e5061d4-86c2-49bc-8fd5-6b38713e44f1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/KIOSKE.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/KIOSKE.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/bord toit.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/bord toit.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/sol lumineux.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/sol lumineux.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/sol principale.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Fbx/sol principale.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/6gqq1c1a.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/6gqq1c1a.bmp.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2 1.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2 1.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2 2.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2 2.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV2.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/clcyq7a6.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/clcyq7a6.bmp.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/digital paint VERSION BRUH.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/digital paint VERSION BRUH.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/i3exyx07.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/i3exyx07.bmp.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/i950k0c5.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/i950k0c5.bmp.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/kioske copie 1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/kioske copie 1.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/oyhod4bw.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/oyhod4bw.bmp.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol 2  copie 2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol 2  copie 2.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol lumineux  copie 2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol lumineux  copie 2.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol principale  copie.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/sol principale  copie.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/taule.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Materials/taule.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/AttackSword.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/AttackSword.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/RangedEnemy.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/RangedEnemy.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/TV1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/TV1.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/New Universal Render Pipeline Asset_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/New Universal Render Pipeline Asset_Renderer.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/URP-PSX/Assets/UniversalRenderPipelineAsset_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/URP-PSX/Assets/UniversalRenderPipelineAsset_Renderer.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Game/Scriptable Objects/Enemies/Medium.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/Scriptable Objects/Enemies/Medium.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Aura Hide.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Aura Hide.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Aura Show.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Aura Show.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Beast Guts Wave Start.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Beast Guts Wave Start.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Bio Plasma Shoot01.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Bio Plasma Shoot01.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Buluc Chabtan Effect End Final.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Buluc Chabtan Effect End Final.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Electro Bolt Shoot.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Electro Bolt Shoot.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Electro2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Electro2.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Flap.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Flap.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Monster Cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Monster Cry.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Monster Cry02.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Monster Cry02.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Player Death.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Player Death.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Player Hurt.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Player Hurt.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Splat01.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Splat01.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Splat02.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Splat02.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Splat03.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Splat03.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Track Vehicle01.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/SD/Track Vehicle01.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/_Prefabs/Panel.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/_Prefabs/Panel.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/_Scripts/CanvasAnim.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Game/_Scripts/CanvasAnim.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/SwordBlade.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/SwordBlade.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/Animations/Canvas.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/Animations/Canvas.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/Animations/FadeIn.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/Animations/FadeIn.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/Animations/FadeOut.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/Animations/FadeOut.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/Scenes/Menu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Game/Scenes/SampleScene 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/Scenes/SampleScene 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Game/_Prefabs/Enemies/RangedEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/_Prefabs/Enemies/RangedEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Game/_Scripts/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/_Scripts/EnemyController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Game/_Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/_Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Game/_Scripts/SwordBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Game/_Scripts/SwordBehaviour.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

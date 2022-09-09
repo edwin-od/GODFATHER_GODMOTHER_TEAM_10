@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private KeyCode attackJoystick = KeyCode.JoystickButton2;
+    [SerializeField] private KeyCode throwJoystick = KeyCode.JoystickButton3;
+    
     [SerializeField] Sprite fullHeart;
     [SerializeField] Sprite halfHeart;
     [SerializeField] Sprite emptyHeart;
@@ -216,7 +219,6 @@ public class GameManager : MonoBehaviour
         isPlayerTransition = false;
         
         currentPlayer.possessed = false;
-        currentPlayer.SwitchMaterial(false);
         currentPlayer.agent.enabled = true;
         currentPlayer.col.isTrigger = true;
         if (currentPlayer.animator)
@@ -258,7 +260,8 @@ public class GameManager : MonoBehaviour
         if (pause) ResumeGame();
         else PauseGame();
     }
-    
+
+    private bool cancelThrow = false;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKey(KeyCode.JoystickButton7))
@@ -282,7 +285,11 @@ public class GameManager : MonoBehaviour
 
             if (currentPlayer && !isPlayerTransition && !isPlayerCorrupted)
             {
-                if (Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode.Mouse1))
+                if (Input.GetKeyDown(throwJoystick) || Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    cancelThrow = false;
+                }
+                if (!cancelThrow && Input.GetKey(throwJoystick) || Input.GetKey(KeyCode.Mouse1))
                 {
                     RaycastHit hit;
                     Physics.Raycast(new Ray(currentPlayer.transform.position, currentPlayer.transform.forward), out hit, predictionLayers);
@@ -290,21 +297,29 @@ public class GameManager : MonoBehaviour
                     currentPlayer.prediction.localScale = new Vector3(2, 2, (hit.transform ? hit.distance : 1000) * 2);
                 }
 
-                if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse1))
+                if (Input.GetKeyUp(throwJoystick) || Input.GetKeyUp(KeyCode.Mouse1))
                 {
-                    audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
-                    swordBehaviour.SetColliderRadius(false);
-                    currentPlayer.animator.SetTrigger("Attack");
-                    isPlayerTransition = true;
-                    launchDir = currentPlayer.transform.forward;
-                    sword.transform.SetParent(null);
-                    launchLimit = 0;
+                    if (!cancelThrow)
+                    {
+                        currentPlayer.SwitchMaterial(false);
+                        audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
+                        swordBehaviour.SetColliderRadius(false);
+                        currentPlayer.animator.SetTrigger("Attack");
+                        isPlayerTransition = true;
+                        launchDir = currentPlayer.transform.forward;
+                        sword.transform.SetParent(null);
+                        launchLimit = 0;
 
-                    currentPlayer.prediction.gameObject.SetActive(false);
+                        currentPlayer.prediction.gameObject.SetActive(false);
+                    }
+
+                    cancelThrow = false;
                 }
 
-                if (!swordBehaviour.swinging && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.JoystickButton2)))
+                if (!swordBehaviour.swinging && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(attackJoystick)))
                 {
+                    cancelThrow = true;
+                    currentPlayer.prediction.gameObject.SetActive(false);
                     currentPlayer.Attack();
                     swordBehaviour.swinging = true;
                 }
