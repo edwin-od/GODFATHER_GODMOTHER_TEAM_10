@@ -4624,6 +4624,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4612520378060379669, guid: 360a8fb1cfff81f4ab69dd8e38101f2e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5342dd07ba977d945864817949b7d373, type: 2}
     - target: {fileID: 919132149155446097, guid: 360a8fb1cfff81f4ab69dd8e38101f2e, type: 3}
       propertyPath: m_Name
       value: hologramme
@@ -22278,6 +22282,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4612520378060379669, guid: 360a8fb1cfff81f4ab69dd8e38101f2e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5342dd07ba977d945864817949b7d373, type: 2}
     - target: {fileID: 919132149155446097, guid: 360a8fb1cfff81f4ab69dd8e38101f2e, type: 3}
       propertyPath: m_Name
       value: hologramme (2)
@@ -43149,6 +43157,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4612520378060379669, guid: 360a8fb1cfff81f4ab69dd8e38101f2e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5342dd07ba977d945864817949b7d373, type: 2}
     - target: {fileID: 919132149155446097, guid: 360a8fb1cfff81f4ab69dd8e38101f2e, type: 3}
       propertyPath: m_Name
       value: hologramme (1)
