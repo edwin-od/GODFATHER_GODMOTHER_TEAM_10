@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
 
 
     public CanvasAnim _AnimInstance;
+    private bool endGame = false;
     
     public void RemoveEnemy(EnemyController e)
     {
@@ -83,16 +84,7 @@ public class GameManager : MonoBehaviour
         {
            _AnimInstance.End();
             StopEverything();
-            if (Input.GetKeyDown(KeyCode.JoystickButton0))
-            {
-                _AnimInstance.Restart();
-                Retry();
-            }
-            else if (Input.GetKeyDown(KeyCode.Joystick1Button3))
-            {
-                Exit();
-            }
-            
+            endGame = true;
         }
 
         currentEnemies.Remove(e);
@@ -273,6 +265,20 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKey(KeyCode.JoystickButton7))
         {
             TogglePause();
+        }
+
+        if (endGame)
+        {
+            if (Input.GetKeyDown(KeyCode.JoystickButton2))
+            {
+                _AnimInstance.Restart();
+                endGame = false;
+                Retry();
+            }
+            else if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            {
+                Exit();
+            }
         }
 
         if (!pause)
