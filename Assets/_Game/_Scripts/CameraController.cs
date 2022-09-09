@@ -10,8 +10,10 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         if (!GameManager.Instance) return;
+
+        Transform follow = GameManager.Instance.isPlayerTransition ? GameManager.Instance.sword.transform : GameManager.Instance.Player.transform;
         
-        Vector3 aprox = Vector3.Lerp(transform.position, GameManager.Instance.Player.transform.position, Time.deltaTime * camFollowSpeed);
-        transform.position = Vector3.Distance(GameManager.Instance.Player.transform.position, aprox) > 0.01f ? aprox : GameManager.Instance.Player.transform.position;
+        Vector3 aprox = Vector3.Lerp(transform.position, follow.position, Time.deltaTime * camFollowSpeed);
+        transform.position = Vector3.Distance(follow.position, aprox) > 0.01f ? aprox : follow.position;
     }
 }

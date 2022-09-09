@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
             e.gameObject.SetActive(false);
         }
         currentPlayer.gameObject.SetActive(false);
+        PauseGame();
     }
 
     public void PauseChase()
@@ -164,7 +165,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool isPlayerTransition = false;
     [HideInInspector] public bool isPlayerCorrupted = false;
     
-    [SerializeField] private GameObject sword;
+    public GameObject sword;
     private SwordBehaviour swordBehaviour;
     [SerializeField] private float swordSpeed;
     public Vector3 launchDir;
@@ -224,12 +225,14 @@ public class GameManager : MonoBehaviour
         SpawnHPs();
     }
 
-    void LaunchLimit()
+    public void LaunchLimit()
     {
         isPlayerTransition = false;
         sword.transform.SetParent(currentPlayer.swordContainer);
         sword.transform.localPosition = new Vector3(0.00015f, -0.00061f, 0.00012f);
         sword.transform.localEulerAngles = new Vector3(7.469854f, 168.0391f, 164.1708f);
+
+        currentPlayer.Die();
     }
 
     void TogglePause()
@@ -261,7 +264,7 @@ public class GameManager : MonoBehaviour
 
             if (currentPlayer && !isPlayerTransition && !isPlayerCorrupted)
             {
-                if (Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode.Mouse0))
+                if (Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode.Mouse1))
                 {
                     RaycastHit hit;
                     Physics.Raycast(new Ray(currentPlayer.transform.position, currentPlayer.transform.forward), out hit, predictionLayers);
@@ -269,7 +272,7 @@ public class GameManager : MonoBehaviour
                     currentPlayer.prediction.localScale = new Vector3(2, 2, (hit.transform ? hit.distance : 1000) * 2);
                 }
 
-                if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse0))
+                if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse1))
                 {
                     currentPlayer.animator.SetTrigger("Attack");
                     isPlayerTransition = true;
@@ -280,7 +283,7 @@ public class GameManager : MonoBehaviour
                     currentPlayer.prediction.gameObject.SetActive(false);
                 }
 
-                if (!swordBehaviour.swinging && (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.JoystickButton2)))
+                if (!swordBehaviour.swinging && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.JoystickButton2)))
                 {
                     currentPlayer.Attack();
                     swordBehaviour.swinging = true;

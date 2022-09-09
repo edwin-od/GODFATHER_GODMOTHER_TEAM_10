@@ -89,7 +89,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
         dead = true;
 
@@ -184,12 +184,14 @@ public class EnemyController : MonoBehaviour
     {
         GameManager.Instance.isPlayerCorrupted = true;
         GameManager.Instance.PauseChase();
+        SpawnManager.Instance.pause = true;
     }
 
     public void CorruptionEnd()
     {
         GameManager.Instance.isPlayerCorrupted = false;
         GameManager.Instance.ResumeChase();
+        SpawnManager.Instance.pause = false;
     }
 
     public void AttackStart()
