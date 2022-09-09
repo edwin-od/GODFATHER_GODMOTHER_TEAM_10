@@ -121,6 +121,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private bool pause = false;
+
+    public void PauseGame()
+    {
+        pause = true;
+        SpawnManager.Instance.pause = true;
+        PauseChase();
+        currentPlayer.animator.speed = 0;
+    }
+    
+    public void ResumeGame()
+    {
+        currentPlayer.animator.speed = 1;
+        pause = false;
+        SpawnManager.Instance.pause = false;
+        ResumeChase();
+    }
+
     public void ResumeChase()
     {
         foreach (var e in currentEnemies)
@@ -210,64 +228,73 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerTransition)
+        if (!pause)
         {
-            sword.transform.position += launchDir.normalized * swordSpeed * Time.deltaTime;
-            sword.transform.rotation *= Quaternion.Euler(-Time.deltaTime * 500, 0, 0);
-            launchLimit += Time.deltaTime;
+            if (isPlayerTransition)
+            {
+                sword.transform.position += launchDir.normalized * swordSpeed * Time.deltaTime;
+                sword.transform.rotation *= Quaternion.Euler(-Time.deltaTime * 500, 0, 0);
+                launchLimit += Time.deltaTime;
             
-            if (launchLimit >= 2)
-            {
-                LaunchLimit();
-            }
-        }
-
-        if (currentPlayer && !isPlayerTransition && !isPlayerCorrupted)
-        {
-            if (Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode.Mouse0))
-            {
-                RaycastHit hit;
-                Physics.Raycast(new Ray(currentPlayer.transform.position, currentPlayer.transform.forward), out hit, predictionLayers);
-                currentPlayer.prediction.gameObject.SetActive(true);
-                currentPlayer.prediction.localScale = new Vector3(2, 2, (hit.transform ? hit.distance : 1000) * 2);
+                if (launchLimit >= 2)
+                {
+                    LaunchLimit();
+                }
             }
 
-            if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse0))
+            if (currentPlayer && !isPlayerTransition && !isPlayerCorrupted)
             {
-                currentPlayer.animator.SetTrigger("Attack");
-                isPlayerTransition = true;
-                launchDir = currentPlayer.transform.forward;
-                sword.transform.SetParent(null);
-                launchLimit = 0;
+                if (Input.GetKey(KeyCode.JoystickButton3) || Input.GetKey(KeyCode.Mouse0))
+                {
+                    RaycastHit hit;
+                    Physics.Raycast(new Ray(currentPlayer.transform.position, currentPlayer.transform.forward), out hit, predictionLayers);
+                    currentPlayer.prediction.gameObject.SetActive(true);
+                    currentPlayer.prediction.localScale = new Vector3(2, 2, (hit.transform ? hit.distance : 1000) * 2);
+                }
 
-                currentPlayer.prediction.gameObject.SetActive(false);
-            }
+                if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse0))
+                {
+                    currentPlayer.animator.SetTrigger("Attack");
+                    isPlayerTransition = true;
+                    launchDir = currentPlayer.transform.forward;
+                    sword.transform.SetParent(null);
+                    launchLimit = 0;
 
-            if (!swordBehaviour.swinging && (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.JoystickButton2)))
-            {
-                currentPlayer.Attack();
-                swordBehaviour.swinging = true;
+                    currentPlayer.prediction.gameObject.SetActive(false);
+                }
+
+                if (!swordBehaviour.swinging && (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.JoystickButton2)))
+                {
+                    currentPlayer.Attack();
+                    swordBehaviour.swinging = true;
+                }
             }
         }
     }
 
     private void FixedUpdate()
     {
-        if (currentPlayer && !isPlayerTransition && !isPlayerCorrupted)
+        if (!pause)
         {
-            Vector3 dir = (Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal")).normalized;
-            currentPlayer.transform.rotation = Quaternion.LookRotation(dir.sqrMagnitude == 0 ? currentPlayer.transform.forward : dir);
-            currentPlayer.rb.AddForce(dir * playerAcceleration, ForceMode.Force);
-            if (currentPlayer.rb.velocity.magnitude > playerSpeed)
+            if (currentPlayer && !isPlayerTransition && !isPlayerCorrupted)
             {
-                currentPlayer.rb.velocity = currentPlayer.rb.velocity.normalized * playerSpeed;
+                bool forward = Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W);
+                bool backward = Input.GetKey(KeyCode.S);
+                bool left = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q);
+                bool right = Input.GetKey(KeyCode.D);
+                Vector3 dir = (Vector3.forward * (Input.GetAxis("Vertical") + (forward ? 1 : backward ? -1 : 0))  + Vector3.right * (Input.GetAxis("Horizontal") +  + (right ? 1 : left ? -1 : 0))).normalized;
+                currentPlayer.transform.rotation = Quaternion.LookRotation(dir.sqrMagnitude == 0 ? currentPlayer.transform.forward : dir);
+                currentPlayer.rb.AddForce(dir * playerAcceleration, ForceMode.Force);
+                if (currentPlayer.rb.velocity.magnitude > playerSpeed)
+                {
+                    currentPlayer.rb.velocity = currentPlayer.rb.velocity.normalized * playerSpeed;
+                }
             }
         }
     }
 
     public void StopSwing()
     {
-
         swordBehaviour.swinging = false;
     }
 
