@@ -112,7 +112,7 @@ public class EnemyController : MonoBehaviour
             if (isInv && !forceApply) return;
             isInv = true;
         }
-        else
+        else if (!dead)
         {
             hurted = true;
             animator.SetTrigger("Hurt");
@@ -238,7 +238,7 @@ public class EnemyController : MonoBehaviour
                     {
                         Attack();
                     }
-                    else if (!hit)
+                    else if (!hit && !hurted)
                     {
                         GameManager.Instance.Player.ApplyDamage(enemySO.dmg);
                         hit = true;
