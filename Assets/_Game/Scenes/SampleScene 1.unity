@@ -43999,7 +43999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageStartDelay: 5
-  spawnRate: 2
+  spawnRate: 3
   pause: 0
 --- !u!114 &2045990888
 MonoBehaviour:
@@ -44015,7 +44015,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackJoystick: 332
   throwJoystick: 333
-  healthBar: {fileID: 0}
+  fullHeart: {fileID: 0}
+  halfHeart: {fileID: 0}
+  emptyHeart: {fileID: 0}
+  hpContainer: {fileID: 0}
   playerSpawn: {fileID: 415416675}
   playerSpawnType: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
   playerAcceleration: 10000
@@ -44099,26 +44102,6 @@ MonoBehaviour:
     - enemies:
       - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
         amount: 5
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
-      - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
-        amount: 3
       - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
         amount: 3
       - enemy: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
