@@ -1,11 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(CapsuleCollider))]
 public class SwordBehaviour : MonoBehaviour
 {
     [SerializeField] private LayerMask obstaclesLayers;
     [HideInInspector] public bool swinging;
+    [SerializeField] CapsuleCollider col;
+    [SerializeField] private float attackColSize = 1;
+    [SerializeField] private float throwColSize = 1;
+
+    public void SetColliderRadius(bool attack)
+    {
+        col.radius = attack ? attackColSize : throwColSize;
+    }
+
+    private void Start()
+    {
+        SetColliderRadius(true);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,12 +36,10 @@ public class SwordBehaviour : MonoBehaviour
             {
                 GameManager.Instance.ChangePlayer(perso);
             }
-        }/*
+        }
         else if (obstaclesLayers == (obstaclesLayers | (1 << other.gameObject.layer)))
         {
-            Vector3 reflectVec = Vector3.Reflect(transform.forward, transform.position.normalized);
-            reflectVec.y = 0;
-            GameManager.Instance.launchDir = reflectVec;
-        }*/
+            GameManager.Instance.LaunchLimit();
+        }
     }
 }

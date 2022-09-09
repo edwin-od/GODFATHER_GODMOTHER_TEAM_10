@@ -140,6 +140,7 @@ public class EnemyController : MonoBehaviour
         corruptionParticle.Stop();
     }
 
+    public float attackDistance = 3;
     private float elapsedAgent = 0;
     private float rateAgent = 0.25f;
     public float cooldownAttack = 1f;
@@ -165,7 +166,7 @@ public class EnemyController : MonoBehaviour
 
         if (!dead && elapsedAttack <= 0)
         {
-            if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= 2)
+            if (Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) <= attackDistance)
             {
                 if (!attacking)
                 {
