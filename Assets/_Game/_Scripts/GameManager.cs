@@ -131,6 +131,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PauseChase(EnemyController enemy)
+    {
+        enemy.agent.enabled = false;
+        enemy.rb.useGravity = false;
+        enemy.pause = true;
+    }
+
     private bool pause = false;
 
     public void PauseGame()
@@ -165,6 +172,13 @@ public class GameManager : MonoBehaviour
             e.agent.enabled = true;
             e.rb.useGravity = true;
         }
+    }
+    
+    public void ResumeChase(EnemyController enemy)
+    {
+        enemy.agent.enabled = true;
+        enemy.rb.useGravity = true;
+        enemy.pause = false;
     }
 
     public EnemySpawn[] CurrentEnemySpawnInfo => stages[currentStage].enemyWaves[currentEnemyWave].enemies;

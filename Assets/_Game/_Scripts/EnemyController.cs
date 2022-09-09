@@ -112,10 +112,15 @@ public class EnemyController : MonoBehaviour
             if (isInv && !forceApply) return;
             isInv = true;
         }
-        else if (!dead)
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
         {
             hurted = true;
             animator.SetTrigger("Hurt");
+            if (!possessed) GameManager.Instance.PauseChase(this);
         }
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, enemySO.hp);
         bloodParticle.Play();
@@ -132,7 +137,7 @@ public class EnemyController : MonoBehaviour
     {
         dead = true;
         audioManager.PlayClip(possessed ? "DeathHero" : "DeathEnemy");
-        animator.SetTrigger("Death");
+        animator.SetBool("Death", true);
 
         GameManager.Instance.RemoveEnemy(this);
         agent.enabled = false;
@@ -148,6 +153,7 @@ public class EnemyController : MonoBehaviour
     public void NoMoreHurt()
     {
         hurted = false;
+        GameManager.Instance.ResumeChase(this);
     }
 
     IEnumerator Death()
