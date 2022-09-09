@@ -128,12 +128,18 @@ public class GameManager : MonoBehaviour
         pause = true;
         SpawnManager.Instance.pause = true;
         PauseChase();
-        currentPlayer.animator.speed = 0;
+        foreach (var e in currentEnemies)
+        {
+            e.animator.speed = 0;
+        }
     }
     
     public void ResumeGame()
     {
-        currentPlayer.animator.speed = 1;
+        foreach (var e in currentEnemies)
+        {
+            e.animator.speed = 1;
+        }
         pause = false;
         SpawnManager.Instance.pause = false;
         ResumeChase();
@@ -226,8 +232,19 @@ public class GameManager : MonoBehaviour
         sword.transform.localEulerAngles = new Vector3(7.469854f, 168.0391f, 164.1708f);
     }
 
+    void TogglePause()
+    {
+        if (pause) ResumeGame();
+        else PauseGame();
+    }
+    
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKey(KeyCode.JoystickButton7))
+        {
+            TogglePause();
+        }
+
         if (!pause)
         {
             if (isPlayerTransition)
