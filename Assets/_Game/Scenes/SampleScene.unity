@@ -1635,6 +1635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageStartDelay: 5
   spawnRate: 2
+  pause: 0
 --- !u!114 &2045990888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1647,6 +1648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aeb6c3d72e1aee4aa7e0960c4b7f480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackJoystick: 332
+  throwJoystick: 333
   fullHeart: {fileID: 21300000, guid: 2185d4e940c802c499601a0ef21075b1, type: 3}
   halfHeart: {fileID: 21300000, guid: 1a97cebff74ddd5458da0c43be3bdb7c, type: 3}
   emptyHeart: {fileID: 21300000, guid: b4d2d78a6d4429a4bbea96e6ee395da5, type: 3}
@@ -1671,11 +1674,14 @@ MonoBehaviour:
   predictionLayers:
     serializedVersion: 2
     m_Bits: 192
+  _AnimInstance: {fileID: 0}
+  audioManager: {fileID: 0}
   isPlayerTransition: 0
   isPlayerCorrupted: 0
   sword: {fileID: 542963977791110765}
   swordSpeed: 10
   launchDir: {x: 0, y: 0, z: 0}
+  forceThrowTimer: 10
 --- !u!4 &2045990889
 Transform:
   m_ObjectHideFlags: 0
@@ -1895,3 +1901,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   swinging: 0
+  col: {fileID: 0}
+  attackColSize: 1
+  throwColSize: 1
