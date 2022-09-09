@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
             {
                 Exit();
             }
+            
         }
 
         currentEnemies.Remove(e);
@@ -174,7 +175,7 @@ public class GameManager : MonoBehaviour
     public EnemySpawn[] CurrentEnemySpawnInfo => stages[currentStage].enemyWaves[currentEnemyWave].enemies;
     public Transform[] CurrentEnemySpawnsPoints => stages[currentStage].spawnPoints;
 
-    [SerializeField] private AudioManager audioManager;
+    public AudioManager audioManager;
 
     public Action OnNewEnemyWave;
     public Action OnNewStage;
@@ -202,8 +203,6 @@ public class GameManager : MonoBehaviour
     
     void StartGame()
     {
-        forceThrowCountdown = 2 * forceThrowTimer;
-        
         currentPlayer = Instantiate(playerSpawnType.prefab, playerSpawn).GetComponent<EnemyController>();
         currentPlayer.transform.SetParent(null);
         currentPlayer.transform.position = playerSpawn.position;
@@ -262,9 +261,6 @@ public class GameManager : MonoBehaviour
         else PauseGame();
     }
 
-    [SerializeField] private float forceThrowTimer = 10;
-    private float forceThrowCountdown;
-    private bool firstForce = true;
     private bool cancelThrow = false;
     private void Update()
     {
@@ -305,8 +301,6 @@ public class GameManager : MonoBehaviour
                 {
                     if (!cancelThrow)
                     {
-                        forceThrowCountdown = forceThrowTimer;
-                        
                         currentPlayer.SwitchMaterial(false);
                         audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
                         swordBehaviour.SetColliderRadius(false);
@@ -330,15 +324,7 @@ public class GameManager : MonoBehaviour
                     swordBehaviour.swinging = true;
                 }
             }
-
-            forceThrowCountdown -= Time.deltaTime;
-            if (forceThrowCountdown < 0)
-            {
-                currentPlayer.Die();
-            }
         }
-
-        Debug.Log(forceThrowCountdown);
     }
 
     private void FixedUpdate()
