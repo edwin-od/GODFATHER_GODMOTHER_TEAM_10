@@ -29,6 +29,7 @@ public class SpawnManager : MonoBehaviour
 
     void NewEnemyWave()
     {
+        elapsed = -stageStartDelay;
         foreach (GameManager.EnemySpawn info in GameManager.Instance.CurrentEnemySpawnInfo)
         {
             for (int i = 0; i < info.amount; i++)
