@@ -499,7 +499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2156297514107106053}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.834911, y: 0, z: -11.64202}
+  m_LocalPosition: {x: -10.72, y: 0, z: -11.64202}
   m_LocalScale: {x: 0.32, y: 0.32, z: 0.32}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -555,6 +555,7 @@ MonoBehaviour:
   rb: {fileID: 5327309939066559098}
   col: {fileID: 4036218945453174405}
   prediction: {fileID: 4041227239437796756}
+  attackDistance: 3
   cooldownAttack: 1
 --- !u!195 &4166064567548698107
 NavMeshAgent:
@@ -566,10 +567,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 10.61
-  m_Speed: 3.5
-  m_Acceleration: 7.61
+  m_Speed: 10
+  m_Acceleration: 40
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

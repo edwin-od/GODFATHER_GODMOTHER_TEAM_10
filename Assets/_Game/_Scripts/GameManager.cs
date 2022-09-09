@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -73,13 +74,25 @@ public class GameManager : MonoBehaviour
             currentEnemies.Add(e);
     }
 
+
+    public CanvasAnim _AnimInstance;
+    
     public void RemoveEnemy(EnemyController e)
     {
         if (e == currentPlayer)
         {
-            // LOSE
+           _AnimInstance.End();
             StopEverything();
-
+            if (Input.GetKeyDown(KeyCode.JoystickButton0))
+            {
+                _AnimInstance.Restart();
+                Retry();
+            }
+            else if (Input.GetKeyDown(KeyCode.Joystick1Button3))
+            {
+                Exit();
+            }
+            
         }
 
         currentEnemies.Remove(e);
@@ -206,7 +219,6 @@ public class GameManager : MonoBehaviour
         isPlayerTransition = false;
         
         currentPlayer.possessed = false;
-        currentPlayer.SwitchMaterial(false);
         currentPlayer.agent.enabled = true;
         currentPlayer.col.isTrigger = true;
         if (currentPlayer.animator)
@@ -289,6 +301,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (!cancelThrow)
                     {
+                        currentPlayer.SwitchMaterial(false);
                         audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
                         swordBehaviour.SetColliderRadius(false);
                         currentPlayer.animator.SetTrigger("Attack");
@@ -337,6 +350,7 @@ public class GameManager : MonoBehaviour
 
     public void StopSwing()
     {
+
         swordBehaviour.swinging = false;
     }
 
@@ -388,5 +402,15 @@ public class GameManager : MonoBehaviour
         {
             hps[i].sprite = emptyHeart;
         }
+    }
+
+    private void Retry()
+    {
+        SceneManager.LoadScene("SampleScene 1");
+    }
+
+    private void Exit()
+    {
+        Application.Quit();
     }
 }
