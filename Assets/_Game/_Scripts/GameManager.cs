@@ -209,7 +209,6 @@ public class GameManager : MonoBehaviour
         isPlayerTransition = false;
         
         currentPlayer.possessed = false;
-        currentPlayer.SwitchMaterial(false);
         currentPlayer.agent.enabled = true;
         currentPlayer.col.isTrigger = true;
         if (currentPlayer.animator)
@@ -285,6 +284,7 @@ public class GameManager : MonoBehaviour
 
                 if (Input.GetKeyUp(KeyCode.JoystickButton3) || Input.GetKeyUp(KeyCode.Mouse1))
                 {
+                    currentPlayer.SwitchMaterial(false);
                     audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
                     swordBehaviour.SetColliderRadius(false);
                     currentPlayer.animator.SetTrigger("Attack");
