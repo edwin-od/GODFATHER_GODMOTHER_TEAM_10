@@ -7875,7 +7875,7 @@ GameObject:
   m_Component:
   - component: {fileID: 368863600}
   m_Layer: 0
-  m_Name: Enemy Spawn (3)
+  m_Name: Enemy Spawn (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7894,7 +7894,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1724892200}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &371859236
 PrefabInstance:
@@ -8727,7 +8727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415416674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.5, y: 0, z: -64}
+  m_LocalPosition: {x: 49.42, y: 0, z: -90.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19804,37 +19804,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27f98afdfb377f54d9516d6cb42efde3, type: 3}
---- !u!1 &926974890
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 926974891}
-  m_Layer: 0
-  m_Name: Enemy Spawn (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &926974891
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926974890}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 49.56, y: 0, z: -88.58}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1724892200}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &928508446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36103,7 +36072,6 @@ Transform:
   m_Children:
   - {fileID: 250500102}
   - {fileID: 793222928}
-  - {fileID: 926974891}
   - {fileID: 368863600}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -42861,6 +42829,7 @@ GameObject:
   - component: {fileID: 2045990889}
   - component: {fileID: 2045990888}
   - component: {fileID: 2045990887}
+  - component: {fileID: 2045990890}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -42916,7 +42885,6 @@ MonoBehaviour:
     spawnPoints:
     - {fileID: 250500102}
     - {fileID: 793222928}
-    - {fileID: 926974891}
     - {fileID: 368863600}
   predictionLayers:
     serializedVersion: 2
@@ -42941,6 +42909,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2045990890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045990886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a32bd740c0c484690cc1552d15edba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allSounds:
+  - name: Introduction
+    clip: {fileID: 8300000, guid: b946de11075b5264cae4777549eb3d2e, type: 3}
+    volume: 0.112
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Loop
+    clip: {fileID: 8300000, guid: f68d9f6425a76da4895b07d5dfde3c19, type: 3}
+    volume: 0.112
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &2049060389
 GameObject:
   m_ObjectHideFlags: 0

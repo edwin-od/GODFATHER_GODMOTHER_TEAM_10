@@ -44,27 +44,32 @@ public class SpawnManager : MonoBehaviour
         elapsed = -stageStartDelay;
     }
 
+    [HideInInspector] public bool pause = false;
+    
     private void Update()
     {
-        if (enemies.Count > 0)
+        if (!pause)
         {
-            elapsed += Time.deltaTime;
-            if (elapsed > spawnRate)
+            if (enemies.Count > 0)
+            {
+                elapsed += Time.deltaTime;
+                if (elapsed > spawnRate)
+                {
+                    elapsed = 0;
+
+                    int index = Random.Range(0, enemies.Count);
+                    EnemySO enemy = enemies[index];
+                    int spInd = Random.Range(0, spawnPoints.Length);
+                    Transform enemyInstance = Instantiate(enemy.prefab, spawnPoints[spInd]);
+                    enemyInstance.SetParent(null);
+                    enemyInstance.position = spawnPoints[spInd].position;
+                    enemies.RemoveAt(index);
+                }
+            }
+            else if (elapsed != 0)
             {
                 elapsed = 0;
-
-                int index = Random.Range(0, enemies.Count);
-                EnemySO enemy = enemies[index];
-                int spInd = Random.Range(0, spawnPoints.Length);
-                Transform enemyInstance = Instantiate(enemy.prefab, spawnPoints[spInd]);
-                enemyInstance.SetParent(null);
-                enemyInstance.position = spawnPoints[spInd].position;
-                enemies.RemoveAt(index);
             }
-        }
-        else if (elapsed != 0)
-        {
-            elapsed = 0;
         }
     }
 }
