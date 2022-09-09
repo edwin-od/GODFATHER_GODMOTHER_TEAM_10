@@ -196,6 +196,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float forceThrowTimer = 10;
     private float forceThrowCountdown;
+    [SerializeField] private Slider forceThrowSlider;
     
     private void Start()
     {
@@ -265,6 +266,7 @@ public class GameManager : MonoBehaviour
         else PauseGame();
     }
 
+    private bool firstForce = true;
     private bool cancelThrow = false;
     private void Update()
     {
@@ -306,6 +308,7 @@ public class GameManager : MonoBehaviour
                     if (!cancelThrow)
                     {
                         forceThrowCountdown = forceThrowTimer;
+                        firstForce = false;
                         
                         currentPlayer.SwitchMaterial(false);
                         audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
@@ -332,6 +335,12 @@ public class GameManager : MonoBehaviour
             }
             
             forceThrowCountdown -= Time.deltaTime;
+
+            if (forceThrowSlider)
+            {
+                forceThrowSlider.value = forceThrowCountdown / (firstForce ? 2 * forceThrowTimer : forceThrowTimer);
+            }
+            
             if (forceThrowCountdown < 0)
             {
                 currentPlayer.Die();
