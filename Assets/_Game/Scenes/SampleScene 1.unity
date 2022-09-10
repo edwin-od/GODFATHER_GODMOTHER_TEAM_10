@@ -43165,7 +43165,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.8
+  m_fontSize: 24.7
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -44443,13 +44443,14 @@ MonoBehaviour:
   enemyCountText: {fileID: 422536238}
   waveCountText: {fileID: 1964028636}
   scoreCountText: {fileID: 0}
+  multiplierCountText: {fileID: 0}
   uiCol1: {r: 1, g: 1, b: 1, a: 1}
   uiCol2: {r: 1, g: 1, b: 1, a: 1}
   healthBar: {fileID: 3467855306779609195}
   playerSpawn: {fileID: 415416675}
   playerSpawnType: {fileID: 11400000, guid: 89e3e7e2cb239744989c777a561a444f, type: 2}
   playerAcceleration: 10000
-  playerSpeed: 12
+  playerSpeed: 22
   heartUIDimension: 25
   stages:
   - enemyWaves:
@@ -48171,6 +48172,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1978025362, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1893440826212866953, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
