@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
     public TMP_Text enemyCountText;
     public TMP_Text waveCountText;
     public TMP_Text scoreCountText;
+    public TMP_Text multiplierCountText;
 
-    int score;
+    int multiplier = 1;
+    int score = 0;
 
     [SerializeField] Color uiCol1 = Color.white;
     [SerializeField] Color uiCol2 = Color.white;
@@ -205,7 +207,7 @@ public class GameManager : MonoBehaviour
     public GameObject sword;
     private SwordBehaviour swordBehaviour;
     [SerializeField] private float swordSpeed;
-    public Vector3 launchDir;
+    [HideInInspector] public Vector3 launchDir;
     private float launchLimit;
 
     int currentStage = 0;
@@ -219,6 +221,12 @@ public class GameManager : MonoBehaviour
     
     void StartGame()
     {
+        score = 0;
+        multiplier = 1;
+        currentStage = 0;
+        currentEnemyWave = 0;
+
+
         currentPlayer = Instantiate(playerSpawnType.prefab, playerSpawn).GetComponent<EnemyController>();
         currentPlayer.transform.SetParent(null);
         currentPlayer.transform.position = playerSpawn.position;
