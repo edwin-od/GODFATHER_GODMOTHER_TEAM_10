@@ -12,10 +12,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private KeyCode attackJoystick = KeyCode.JoystickButton2;
     [SerializeField] private KeyCode throwJoystick = KeyCode.JoystickButton3;
     
-    // [SerializeField] Sprite fullHeart;
-    // [SerializeField] Sprite halfHeart;
-    // [SerializeField] Sprite emptyHeart;
-    //[SerializeField] RectTransform hpContainer;
     [SerializeField] public Slider healthBar;
 
     [SerializeField] Transform playerSpawn;
@@ -282,7 +278,6 @@ public class GameManager : MonoBehaviour
         else PauseGame();
     }
 
-    private bool firstForce = true;
     private bool cancelThrow = false;
     private void Update()
     {
@@ -324,21 +319,19 @@ public class GameManager : MonoBehaviour
                 if (Input.GetKeyDown(throwJoystick) || Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     cancelThrow = false;
+                    currentPlayer.prediction.gameObject.SetActive(true);
                 }
                 if (!cancelThrow && Input.GetKey(throwJoystick) || Input.GetKey(KeyCode.Mouse1))
                 {
                     RaycastHit hit;
                     Physics.Raycast(new Ray(currentPlayer.transform.position, currentPlayer.transform.forward), out hit, predictionLayers);
-                    currentPlayer.prediction.gameObject.SetActive(true);
                     currentPlayer.prediction.localScale = new Vector3(2, 2, (hit.transform ? hit.distance : 1000) * 2);
                 }
 
                 if (Input.GetKeyUp(throwJoystick) || Input.GetKeyUp(KeyCode.Mouse1))
                 {
                     if (!cancelThrow)
-                    {
-                        firstForce = false;
-                        
+                    {                        
                         currentPlayer.SwitchMaterial(false);
                         audioManager.PlayClip("Sword" + UnityEngine.Random.Range(1, 4).ToString());
                         swordBehaviour.SetColliderRadius(false);
@@ -358,6 +351,7 @@ public class GameManager : MonoBehaviour
                 {
                     cancelThrow = true;
                     currentPlayer.prediction.gameObject.SetActive(false);
+
                     currentPlayer.Attack();
                     swordBehaviour.swinging = true;
                 }
