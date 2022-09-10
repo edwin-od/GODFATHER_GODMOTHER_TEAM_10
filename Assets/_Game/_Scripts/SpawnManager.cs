@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] float waveStartDelay = 5;
     [SerializeField] float stageStartDelay = 5;
     [SerializeField] float spawnRate = 2;
 
@@ -29,7 +30,7 @@ public class SpawnManager : MonoBehaviour
 
     void NewEnemyWave()
     {
-        elapsed = -stageStartDelay;
+        elapsed = -waveStartDelay;
         foreach (GameManager.EnemySpawn info in GameManager.Instance.CurrentEnemySpawnInfo)
         {
             for (int i = 0; i < info.amount; i++)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -11,6 +12,15 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private KeyCode attackJoystick = KeyCode.JoystickButton2;
     [SerializeField] private KeyCode throwJoystick = KeyCode.JoystickButton3;
+
+    public TMP_Text enemyCountText;
+    public TMP_Text waveCountText;
+    public TMP_Text scoreCountText;
+
+    int score;
+
+    [SerializeField] Color uiCol1 = Color.white;
+    [SerializeField] Color uiCol2 = Color.white;
     
     [SerializeField] public Slider healthBar;
 
@@ -74,9 +84,7 @@ public class GameManager : MonoBehaviour
 
 
     public CanvasAnim _AnimInstance;
-    private bool endGame = false;
-    public Image gameOver;
-    
+    private bool endGame = false;    
     
     public void RemoveEnemy(EnemyController e)
     {
@@ -88,14 +96,17 @@ public class GameManager : MonoBehaviour
         }
 
         currentEnemies.Remove(e);
-        
+        UpdateEnemyCount();
+
         if (currentEnemies.Count == 1)
         {
             ++currentEnemyWave;
+            SetNewWaveUI();
             if (currentEnemyWave >= stages[currentStage].enemyWaves.Length)
             {
                 currentEnemyWave = 0;
                 ++currentStage;
+                SetNewWaveUI();
 
                 if (currentStage >= stages.Length)
                 {
@@ -199,8 +210,6 @@ public class GameManager : MonoBehaviour
 
     int currentStage = 0;
     int currentEnemyWave = 0;
-
-    private Image[] hps;
     
     private void Start()
     {
@@ -214,17 +223,26 @@ public class GameManager : MonoBehaviour
         currentPlayer.transform.SetParent(null);
         currentPlayer.transform.position = playerSpawn.position;
         ChangePlayer(currentPlayer);
-        score = 0;
         
         OnNewStage?.Invoke();
         OnNewEnemyWave?.Invoke();
+
+        SetNewWaveUI();
     }
 
-    public int score
+    int enemyWaveCounter = 0;
+    void SetNewWaveUI()
     {
-        get;
+        enemyWaveCounter = 0;
+        waveCountText.text = "wave " + (currentEnemyWave + 1) + ":";
+        enemyCountText.text = " " + 0 + " / " + stages[currentStage].enemyWaves[currentEnemyWave].enemies.Sum((x) => x.amount);
+    }
 
-        set;
+    void UpdateEnemyCount()
+    {
+        ++enemyWaveCounter;
+        int tot = stages[currentStage].enemyWaves[currentEnemyWave].enemies.Sum((x) => x.amount);
+        enemyCountText.text = " " + enemyWaveCounter + " / " + tot;
     }
 
     public void ChangePlayer(EnemyController newPlayer)
@@ -394,12 +412,6 @@ public class GameManager : MonoBehaviour
     public void UpdateHealthUI()
     {
         healthBar.value = currentPlayer.currentHealth / currentPlayer.enemySO.hp;
-    }
-
-    public TMP_Text scoreText;
-    public void updateScore()
-    {
-        scoreText.text = score.ToString();
     }
 
     private void Retry()
