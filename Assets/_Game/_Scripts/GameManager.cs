@@ -37,7 +37,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Stage[] stages;
 
     [SerializeField] LayerMask predictionLayers;
-    
+
+    [SerializeField] private GameObject deathSword;
+
     [System.Serializable]
     public class EnemySpawn
     {
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
         if (e == currentPlayer)
         {
            _AnimInstance.End();
-            StopEverything();
+            StopEverything(true);
             endGame = true;
         }
 
@@ -113,7 +115,7 @@ public class GameManager : MonoBehaviour
                 if (currentStage >= stages.Length)
                 {
                     // WIN
-                    StopEverything();
+                    StopEverything(false);
 
                     return;
                 }
@@ -123,11 +125,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void StopEverything()
+    void StopEverything(bool dead)
     {
         foreach (var e in currentEnemies)
         {
-            e.gameObject.SetActive(false);
+            if (e != currentPlayer) e.gameObject.SetActive(false);
+        }
+        if (dead)
+        {
+            Instantiate(deathSword, new Vector3(currentPlayer.transform.position.x, 2.59f, currentPlayer.transform.position.z), Quaternion.identity);
         }
         currentPlayer.gameObject.SetActive(false);
         PauseGame();
