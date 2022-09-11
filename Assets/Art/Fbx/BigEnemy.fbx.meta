@@ -1,11 +1,20 @@
 fileFormatVersion: 2
-guid: 0be87f88a7c844d41b45735f647b49fb
+guid: 738a7215ff2cc4e43b04b7d24353059a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -6464178533435968529
     second: rig|Attack
+  - first:
+      74: -6741561602209871511
+    second: rig|BigAttack
+  - first:
+      74: 9201161877321965387
+    second: rig|BigDeath
+  - first:
+      74: -7249145343481017029
+    second: rig|BigRun
   - first:
       74: 6394785727354027343
     second: rig|Death
