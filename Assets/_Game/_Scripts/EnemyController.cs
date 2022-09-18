@@ -119,8 +119,8 @@ public class EnemyController : MonoBehaviour
         else
         {
             hurted = true;
+            GameManager.Instance.PauseChase(this);
             animator.SetTrigger("Hurt");
-            if (!possessed) GameManager.Instance.PauseChase(this);
         }
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, enemySO.hp);
         bloodParticle.Play();
@@ -152,8 +152,9 @@ public class EnemyController : MonoBehaviour
 
     public void NoMoreHurt()
     {
+        Debug.Log("NoMoreHurt");
         hurted = false;
-        if (!possessed) GameManager.Instance.ResumeChase(this);
+        GameManager.Instance.ResumeChase(this);
     }
 
     IEnumerator Death()
@@ -263,6 +264,7 @@ public class EnemyController : MonoBehaviour
 
     public void CorruptionEnd()
     {
+        Debug.Log("CorruptionEnd");
         GameManager.Instance.isPlayerCorrupted = false;
         GameManager.Instance.ResumeChase();
         SpawnManager.Instance.pause = false;
