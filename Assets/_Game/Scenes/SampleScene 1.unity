@@ -44592,19 +44592,19 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Rain
     clip: {fileID: 8300000, guid: 37237eaa90504e448a357f4b5c7bf2a4, type: 3}
-    volume: 0.151
+    volume: 0.107
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Sword1
     clip: {fileID: 8300000, guid: 0f67858a6f6207d4792474c0c19fafbb, type: 3}
-    volume: 0.255
+    volume: 0.156
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Sword2
     clip: {fileID: 8300000, guid: 77532e0a0d5a00d4c935b960259b02bc, type: 3}
-    volume: 0.282
+    volume: 0.148
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -44616,44 +44616,44 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FirstStep
     clip: {fileID: 8300000, guid: 97a1411362bb7b04cba2035a7584680e, type: 3}
-    volume: 0.036
+    volume: 0.05
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: FirstStepHero
     clip: {fileID: 8300000, guid: 97a1411362bb7b04cba2035a7584680e, type: 3}
-    volume: 0.282
+    volume: 0.05
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: SecondStep
     clip: {fileID: 8300000, guid: 5c516bed59d1ecb469938e45e2bd252e, type: 3}
-    volume: 0.03
+    volume: 0.05
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: SecondStepHero
     clip: {fileID: 8300000, guid: 5c516bed59d1ecb469938e45e2bd252e, type: 3}
-    volume: 0.299
+    volume: 0.05
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DeathHero
     clip: {fileID: 8300000, guid: 45c556ff978674e4a9c5f13e3ff8ae5f, type: 3}
-    volume: 0.348
+    volume: 0.582
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: SwordSwing
     clip: {fileID: 8300000, guid: 7a5b5317c32624f469c50d5080ac8870, type: 3}
-    volume: 1
+    volume: 0.652
     pitch: 1.5
     loop: 0
     source: {fileID: 0}
   - name: DeathEnemy
     clip: {fileID: 8300000, guid: 23058bf541c1e3841bf13e631dbd136b, type: 3}
-    volume: 0.167
-    pitch: 1
+    volume: 0.435
+    pitch: 1.04
     loop: 0
     source: {fileID: 0}
 --- !u!1 &2049060389
@@ -48121,6 +48121,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 422536238, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
+      propertyPath: m_fontSize
+      value: 24.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 422536238, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
+      propertyPath: m_margin.x
+      value: -46.431282
+      objectReference: {fileID: 0}
+    - target: {fileID: 422536238, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
+      propertyPath: m_margin.z
+      value: -20.582558
+      objectReference: {fileID: 0}
+    - target: {fileID: 422536238, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 422536238, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1893440826212866953, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -48216,6 +48236,18 @@ PrefabInstance:
     - target: {fileID: 3467855307565102637, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467855307565102639, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467855307565102639, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467855307565102639, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 240
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 727b8c1b8d71b0d42a1248bc4b9f2f33, type: 3}
