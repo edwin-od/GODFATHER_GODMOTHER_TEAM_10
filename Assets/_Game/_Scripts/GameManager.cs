@@ -273,6 +273,9 @@ public class GameManager : MonoBehaviour
             currentPlayer.Transition();
         }
 
+
+        playerSpeed = newPlayer.enemySO.speed;
+
         currentPlayer = newPlayer;
         currentPlayer.agent.enabled = false;
         currentPlayer.col.isTrigger = false;
@@ -287,7 +290,6 @@ public class GameManager : MonoBehaviour
         {
             currentPlayer.Transition();
         }
-
         SpawnHPs();
     }
 

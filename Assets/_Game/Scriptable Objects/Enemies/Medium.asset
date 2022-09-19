@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d30f465c3d7204bb6308ff37890b7e, type: 3}
   m_Name: Medium
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 2
   dmg: 1
+  speed: 17
   type: 2
   prefab: {fileID: 2263023282646018998, guid: 478733dcaa9fb144a9acd200a20a9c6d, type: 3}

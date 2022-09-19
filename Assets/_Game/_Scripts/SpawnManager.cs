@@ -16,7 +16,6 @@ public class SpawnManager : MonoBehaviour
 	public static SpawnManager Instance => _instance;
 
 	List<EnemySO> enemies = new List<EnemySO>();
-	public List<EnemySO> specialEnemies = new List<EnemySO>();
 
 	void Awake()
 	{
@@ -70,19 +69,10 @@ public class SpawnManager : MonoBehaviour
 					EnemySO enemy = enemies[index];
 					int spInd = Random.Range(0, spawnPoints.Length);
 					Transform enemyInstance;
+				 
 
-					if (Random.value > 0.85f)
-					{
-						if (Random.value > 0.5f)
-							enemyInstance = Instantiate(specialEnemies[1].prefab, spawnPoints[spInd]);
-						else
-							enemyInstance = Instantiate(specialEnemies[0].prefab, spawnPoints[spInd]);
-					}
-					else
-					{
-						enemyInstance = Instantiate(enemy.prefab, spawnPoints[spInd]);
-					}
-
+					enemyInstance = Instantiate(enemy.prefab, spawnPoints[spInd]);
+					
 					enemyInstance.SetParent(null);
 					enemyInstance.position = spawnPoints[spInd].position;
 					enemies.RemoveAt(index);

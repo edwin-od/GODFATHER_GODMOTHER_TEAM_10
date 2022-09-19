@@ -40,6 +40,7 @@ public class EnemyController : MonoBehaviour
     bool hit = false;
     bool dead = false;
     bool hurted;
+
     
     private void Awake()
     {
@@ -166,6 +167,9 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
+        if (GameManager.Instance.isPlayerCorrupted)
+            return;
+
         animator.SetTrigger("Attack");
     }
 

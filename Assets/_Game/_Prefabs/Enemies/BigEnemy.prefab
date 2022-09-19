@@ -968,7 +968,7 @@ NavMeshAgent:
   m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 200
-  m_StoppingDistance: 1
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 9113690844131717441}
-  enemySO: {fileID: 11400000, guid: 798aa69edf5b45048bb3cceda5ddda36, type: 2}
+  enemySO: {fileID: 11400000, guid: a76c62ab104f06c48b6adb89dbfa2796, type: 2}
   possessed: 0
   agent: {fileID: 890982167660393939}
   swordContainer: {fileID: 7534296321887862698}
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   prediction: {fileID: 9207087843932866420}
   hitInvincibilityCountdown: 1
   pause: 0
-  attackDistance: 3.5
+  attackDistance: 4.1
   cooldownAttack: 1
 --- !u!1 &5211586662446093237
 GameObject:
