@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d30f465c3d7204bb6308ff37890b7e, type: 3}
   m_Name: Ranged
   m_EditorClassIdentifier: 
-  hp: 2
+  hp: 3
   dmg: 1
+  speed: 12
   type: 2
   prefab: {fileID: 1632385018373941695, guid: d0f5d56974f1b36489371f0c432da312, type: 3}

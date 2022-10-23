@@ -136,21 +136,20 @@ public class GameManager : MonoBehaviour
             Instantiate(deathSword, new Vector3(currentPlayer.transform.position.x, 2.59f, currentPlayer.transform.position.z), Quaternion.identity);
         }
         currentPlayer.gameObject.SetActive(false);
-        PauseGame();
+        //PauseGame();
     }
 
     public void PauseChase()
     {
         foreach (var e in currentEnemies)
         {
-            if (e == currentPlayer) continue;
-            e.agent.enabled = false;
-            e.rb.useGravity = false;
+            PauseChase(e);
         }
     }
 
     public void PauseChase(EnemyController enemy)
     {
+        if (enemy == currentPlayer) return;
         enemy.agent.enabled = false;
         enemy.rb.useGravity = false;
         enemy.pause = true;
@@ -186,14 +185,13 @@ public class GameManager : MonoBehaviour
     {
         foreach (var e in currentEnemies)
         {
-            if (e == currentPlayer) continue;
-            e.agent.enabled = true;
-            e.rb.useGravity = true;
+            ResumeChase(e);
         }
     }
     
     public void ResumeChase(EnemyController enemy)
     {
+        if (enemy == currentPlayer) return;
         enemy.agent.enabled = true;
         enemy.rb.useGravity = true;
         enemy.pause = false;
@@ -261,6 +259,8 @@ public class GameManager : MonoBehaviour
 
     public void ChangePlayer(EnemyController newPlayer)
     {
+        Debug.Log("Sword Arrived");
+
         swordBehaviour.SetColliderRadius(true);
         
         isPlayerTransition = false;
@@ -272,6 +272,9 @@ public class GameManager : MonoBehaviour
         {
             currentPlayer.Transition();
         }
+
+
+        playerSpeed = newPlayer.enemySO.speed;
 
         currentPlayer = newPlayer;
         currentPlayer.agent.enabled = false;
@@ -287,7 +290,6 @@ public class GameManager : MonoBehaviour
         {
             currentPlayer.Transition();
         }
-
         SpawnHPs();
     }
 
@@ -306,8 +308,8 @@ public class GameManager : MonoBehaviour
 
     void TogglePause()
     {
-        if (pause) ResumeGame();
-        else PauseGame();
+        //if (pause) ResumeGame();
+        //else PauseGame();
     }
 
     private bool cancelThrow = false;
@@ -320,13 +322,13 @@ public class GameManager : MonoBehaviour
 
         if (endGame)
         {
-            if (Input.GetKeyDown(KeyCode.JoystickButton2))
+            if (Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.Mouse1))
             {
                 _AnimInstance.Restart();
                 endGame = false;
                 Retry();
             }
-            else if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            else if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse2))
             {
                 Exit();
             }

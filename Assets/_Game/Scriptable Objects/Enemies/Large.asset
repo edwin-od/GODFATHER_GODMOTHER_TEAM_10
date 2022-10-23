@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Large
   m_EditorClassIdentifier: 
   hp: 5
-  type: 1
-  prefab: {fileID: 8272102872719562968, guid: 3317aeb5bb8ce224386f5c8baee524c1, type: 3}
+  dmg: 2
+  speed: 10
+  type: 2
+  prefab: {fileID: 5624939729359199920, guid: b9e25a65c3ae6e543a30b18adcb5fa1d, type: 3}
